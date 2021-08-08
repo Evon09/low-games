@@ -2,10 +2,6 @@
 //const classjogo = require('../Models/classjogo');
 //const classuser = require('../Models/classuser');
 
-
-
-
-
 class Controller {
 
 

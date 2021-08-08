@@ -18,7 +18,7 @@
 
             <div class="container-fluid">
                 <div class="container">
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="/">
                         <img src="img/logo.png" alt="" width="40" class="d-inline-block align-text-top">
                         Low Games
                     </a>
@@ -79,48 +79,20 @@
             </div>
         </section>
         <div class="container">
-
+        <!-- vai listar os jogos cadastrados-->
             <section class="jogos">
                 <h3>Jogos Disponiveis:</h3>
                 <ul type="none">
-                    <!-- vai listar os jogos cadastrados-->
-                    <!-- <div class="remove" onclick="jogo.remover()">X</div> -->
-                    <li>
-                        <img src="img/fh4-ico.png" alt="">
-                        <h1>Forza Horizon 4</h1>
-                        <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto soluta vero et laborum
-                            cum. Unde adipisci autem vel esse placeat ratione aut. Dolore, incidunt eligendi labore
-                            repellendus alias amet culpa?Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                            Iusto soluta vero et laborum cum. Unde adipisci autem vel esse placeat ratione aut. Dolore,
-                            incidunt eligendi labore
-                            repellendus alias amet culpa?</p>
-                        <h2>Nota:</h2>
-                        <div class="notas">10</div>
-                    </li>
-                    <li>
-                        <img src="img/gtav-ico.png" alt="">
-                        <h1>Gta V</h1>
-                        <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto soluta vero et laborum
-                            cum. Unde adipisci autem vel esse placeat ratione aut. Dolore, incidunt eligendi labore
-                            repellendus alias amet culpa?Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                            Iusto soluta vero et laborum cum. Unde adipisci autem vel esse placeat ratione aut. Dolore,
-                            incidunt eligendi labore
-                            repellendus alias amet culpa?</p>
-                        <h2>Nota:</h2>
-                        <div class="notas">10</div>
-                    </li>
-                    <li>
-                        <img src="img/minecraft-ico.png" alt="">
-                        <h1>Minecraft</h1>
-                        <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Iusto soluta vero et laborum
-                            cum. Unde adipisci autem vel esse placeat ratione aut. Dolore, incidunt eligendi labore
-                            repellendus alias amet culpa?Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                            Iusto soluta vero et laborum cum. Unde adipisci autem vel esse placeat ratione aut. Dolore,
-                            incidunt eligendi labore
-                            repellendus alias amet culpa?</p>
-                        <h2>Nota:</h2>
-                        <div class="notas">10</div>
-                    </li>
+                    <% listaJogos.forEach(function(item, index){%>
+                        <li>
+                            <img src=img/<%= item.foto_jogo %> alt="">
+                            <h1 class="cool-link"><a class="link" href="/"><%= item.nome_jogo %></a></h1>
+                            <p> <%= item.resumo_jogo %></p>
+                            <h2>Nota:</h2>
+                            <div class="notas" > <%= item.nota_jogo %> </div>
+                            
+                        </li>
+                    <%});%>
                 </ul>
 
             </section>
@@ -131,9 +103,6 @@
     <footer>
         <p>site feito por jairzin</p>
     </footer>
-    <script type="module" src="../js/Model.js"></script>
-    <script type="module" src="../js/ClassJogo.js"></script>
-    <script type="module" src="../js/ClassUser.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
         </script>
