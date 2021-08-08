@@ -52,6 +52,14 @@ app.get('/cadastro-jogos', function (req, res){
     //     //res.render('cadastro-jogos');
 });
 
+app.get('/login.html', function (req, res){
+
+    //res.send('CARREGANDO');
+   res.render('login');
+    //     //res.render('cadastro-jogos');
+     
+});
+
 
 
 //rota responavel por mandar os dados para o banco de dados;

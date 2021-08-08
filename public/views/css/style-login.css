@@ -11,7 +11,7 @@
 
 main{
 
-    background: radial-gradient(circle, rgba(111,82,187,1) 57%, rgba(38,27,48,1) 100%);
+    background: linear-gradient(to bottom right, #9d33d7 0%, #4a6cba 50%, #9323c7 100%);
     padding: 100px;
     height: 95vh;
 }
