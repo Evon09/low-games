@@ -1,0 +1,245 @@
+*{
+    box-sizing: 0px;
+    margin: 0px;
+    padding: 0px;
+    
+    
+}
+
+
+body{
+    background-color: rgb(38, 27, 48);
+}
+
+header{
+    background-color: rgb(38, 27, 48);
+    
+}
+
+
+.logo{
+
+    padding-left: 2%;
+    display: inline;
+    float: left;
+    
+
+}
+
+
+
+
+
+main{
+
+    background-color: rgb(38, 27, 48);
+    width: 100%;
+    min-height: 100vh;
+    position:relative;
+    top: 01px;
+}
+.jogos{
+
+    background-color: rgb(255, 255, 255);
+    width: 100%;
+    min-height: 300px;
+    border-radius: 10px;
+    
+}
+/**********************************************/
+
+
+section li {
+
+    min-height: 250px;
+    width: 100%;
+    /*display: block;*/
+    padding-bottom:  50px;
+    padding-top:  50px;
+    
+}
+
+section li .paragrafo{
+    padding-top: 10px;
+    padding-right: 80px;
+}
+
+section li img{
+    width: 200px;
+    height: 200px;
+    margin: 20px;
+    float: left;
+    border-radius: 10px;
+    box-shadow: 2px 2px 4px black;
+}
+
+section{
+
+    padding-bottom:50px;
+}
+
+section .notas{
+
+    font-size: 30px;
+    background-color: rgb(42, 6, 77);
+    color: white;
+    border-radius: 5px;
+    letter-spacing: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+    display: inline;
+    margin-left: 20px;
+    position:absolute; 
+    width: 50px;
+    height: 50px;
+
+
+}
+
+section li h2{
+    display: inline;
+}
+
+
+section li h1{
+
+    margin-bottom: 10px;
+    font-size: 25px;
+
+}
+
+
+
+.formulario{
+
+    width: 100%;
+    height: 370px;
+    box-shadow: 2px 2px 4px black;
+    background-color: rgb(59, 40, 77);
+    color: white;
+
+}
+
+
+.formulario li{
+
+    padding-top: 30px;
+
+
+}
+
+#nota{
+    width: 50px;
+    text-align: center;
+
+}
+
+label{
+    padding-right: 10px;
+
+}
+
+
+
+
+
+textarea{
+    padding-left: 10px;
+    padding-top: 5px;
+    border-radius: 5px;
+    outline: none;
+
+}
+
+#nota,#nome{ 
+
+    outline: none;
+
+}
+
+.bntE{
+
+    text-align: center;
+    width: 80px;
+    border: 2px solid rgb(33, 189, 41);
+    padding-right:50px;
+    color:rgb(33, 189, 41) ;
+    background-color:rgb(59, 40, 77) ;
+    transition: 0.22001s;
+    padding-left: 10px;
+    height: 30px;
+    border-radius: 5px;
+    padding-left: 10px;
+    border-radius: 5px;
+}
+
+
+.bntE:hover{
+
+    color: #3b284d;
+    border: 2px solid rgb(0, 0, 0,);
+    background-color: rgb(33, 189, 41);
+}
+
+
+
+footer{
+
+    width: 100%;
+    min-height: 100px;
+    
+    background-color: #3c3154;
+
+}
+
+
+
+
+textarea {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    width: 45%;
+
+}
+
+
+
+/******************************************************************/
+
+.jogo-avaliado{
+
+    color: white;
+    background-color: #7063ac;
+    padding: 20px;
+    box-shadow: 2px 2px 4px black;
+    min-height:300px ;
+}   
+
+
+.jogo-avaliado img{
+
+    width: 200px;
+    height: 200px;
+    margin: 20px;
+    float: left;
+    border-radius: 10px;
+    box-shadow: 2px 2px 4px black;
+}
+
+.jogo-avaliado h1{
+
+    display: inline;
+
+}
+
+
+.jogo-avaliado h2{
+
+    display: inline;
+
+}
