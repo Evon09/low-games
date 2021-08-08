@@ -86,7 +86,7 @@
                     <% listaJogos.forEach(function(item, index){%>
                         <li>
                             <img src=img/<%= item.foto_jogo %> alt="">
-                            <h1 class="cool-link"><a class="link" href="/"><%= item.nome_jogo %></a></h1>
+                            <h1 class="cool-link"><a class="link" href="/jogo/<%=item.id_jogo %>/<%=item.nome_jogo%>"><%= item.nome_jogo %></a></h1>
                             <p> <%= item.resumo_jogo %></p>
                             <h2>Nota:</h2>
                             <div class="notas" > <%= item.nota_jogo %> </div>

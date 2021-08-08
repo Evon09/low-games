@@ -4,10 +4,14 @@ var ejs = require('ejs');
 var http = require('http');
 var mysql = require('mysql2');
 var express = require('express');
+
 var app = express();
 app.use(express.static('public/views'));
+app.use(express.static('public/views/css'));
+app.use(express.static('public/views/img'));
 app.use(express.static('public/Controller'));
 app.use(express.static(__dirname + '/public'));
+
 var sequelize = require('./public/Controller/bancoDeDados');
 
 //ejs config
@@ -33,6 +37,16 @@ app.get('/', function (req, res) {
     });
 
 });
+
+app.get('/jogo/:id/:nome_jogo', function (req, res) {
+
+    jogo.findByPk(req.params.id).then(function (listaJogos) {
+       res.render('jogos',{listaJogos: listaJogos}); 
+    });
+
+   // res.send(req.params.id + req.params.nome_jogo);
+});
+
 
 
 //rota para cadastro;
