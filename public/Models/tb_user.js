@@ -3,8 +3,8 @@
 const database = require('../Controller/bancoDeDados');
 const Sequelize = require('sequelize');
 
-// criando o objeto tb_jogo;
-const jogo = database.define('tb_jogos', {
+// criando o objeto tb_user;
+const user = database.define('tb_user', {
     id_user: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -16,24 +16,25 @@ const jogo = database.define('tb_jogos', {
         allowNull: false,
 
     },
-    resumo_jogo: {
-        type: Sequelize.TEXT,
+    email_user: {
+        type: Sequelize.STRING(60),
         allowNull: false,
 
     },
-    nota_jogo: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
+    senha_user: {
+        type: Sequelize.STRING(60),
+        allowNull: false,
 
     },
-    foto_jogo: {
-        type: Sequelize.BLOB,
-        allowNull: true,
+    peso_user: {
+        type: Sequelize.FLOAT,
+        allowNull: false,
+        defaultValue: 1,
 
     }
 
 });
 
 
-//export tb_jogo;
-module.exports = jogo;
+//export tb_user;
+module.exports = user;
