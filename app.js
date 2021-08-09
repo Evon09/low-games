@@ -4,6 +4,11 @@ var ejs = require('ejs');
 var http = require('http');
 var mysql = require('mysql2');
 var express = require('express');
+const passport = require('passport');
+const session = require('express-session');
+const flash = require('connect-flash');
+const path = require('path');
+require('./auth')(passport);
 
 var app = express();
 app.use(express.static('public/views'));
@@ -29,74 +34,28 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 
-//rota main;
-app.get('/', function (req, res) {
-    
-    jogo.findAll().then(function (listaJogos){
-        res.render('index', { listaJogos: listaJogos });
-    });
+//public 
+    app.use(express.static(path.join(__dirname, 'public')))
 
-});
+//routes
+const admin = require('./routes/admin');
+const user = require('./routes/user');
 
-app.get('/jogo/:id/:nome_jogo', function (req, res) {
+//sesao
+// app.use(session({
+//     secret: 'sesao',
+//     reseve: true,
+//     saveUninitialized:true
+// }))
+// app.use(flash());
+//midware
+// app.use((req, res, next) => {
+//         res.locals.msgCerto =req.flash("");
+//     })
 
-    jogo.findByPk(req.params.id).then(function (listaJogos) {
-       res.render('jogos',{listaJogos: listaJogos}); 
-    });
-
-   // res.send(req.params.id + req.params.nome_jogo);
-});
-
-
-
-//rota para cadastro;
-app.get('/cadastro-jogos', function (req, res){
-
-    jogo.findAll().then(function (listaJogos){
-        res.render('cadastro-jogos', { listaJogos: listaJogos });
-    });
-    
-});
-
-
-//rota para login
-app.get('/login.html', function (req, res){
-
-    
-   res.render('login');
-  
-     
-});
-
-
-//rota responavel por mandar os dados para o banco de dados;
-app.post('/add', (req, res) => {
-
-    jogo.create({
-        nome_jogo: req.body.nome,
-        resumo_jogo: req.body.resumo,
-        foto_jogo: req.body.foto,
-        nota_jogo: 0
-    });
-    
-    res.redirect('/cadastro-jogos')
-   
-});
-
-
-//rota para remover
-app.post('/remove', (req, res) => {
-
-    jogo.destroy({
-        where: {
-        id_jogo: req.body.idJogo
-        }
-    });
-
-    res.redirect('/cadastro-jogos')
-    
-});
-
+//rota admin/user;
+app.use('/admin', admin);
+app.use('/', user);
 
 //inciar o servidor http://localhost:3000/
 app.listen(9000, () => console.log('Aplicação executando na porta 9000!'));

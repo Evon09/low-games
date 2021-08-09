@@ -22,7 +22,7 @@ const user = database.define('tb_user', {
 
     },
     senha_user: {
-        type: Sequelize.STRING(60),
+        type: Sequelize.STRING(100),
         allowNull: false,
 
     },

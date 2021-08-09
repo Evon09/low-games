@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style-index.css">
+    <link rel="stylesheet" href="../css/style-index.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Low Games</title>
@@ -19,7 +19,7 @@
             <div class="container-fluid">
                 <div class="container">
                     <a class="navbar-brand" href="/">
-                        <img src="img/logo.png" alt="" width="40" class="d-inline-block align-text-top">
+                        <img src="../img/logo.png" alt="" width="40" class="d-inline-block align-text-top">
                         Low Games
                     </a>
                 </div>
@@ -44,21 +44,21 @@
                     </div>
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="img/fh5.jpg" class="d-block w-100" alt="...">
+                            <img src="../img/fh5.jpg" class="d-block w-100" alt="...">
                             <div class="carousel-caption d-none d-md-block">
                                 <h5>Forza Horizon 5</h5>
                                 <p>Destaque da semana com forza horizon 5.</p>
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <img src="img/gtav.png" class="d-block w-100" alt="...">
+                            <img src="../img/gtav.png" class="d-block w-100" alt="...">
                             <div class="carousel-caption d-none d-md-block">
                                 <h5>Gta 5</h5>
                                 <p>Gta depois de anos do seu lançamento ainda vende.</p>
                             </div>
                         </div>
                         <div class="carousel-item">
-                            <img src="img/minecraft.jpg" class="d-block w-100" alt="...">
+                            <img src="../img/minecraft.jpg" class="d-block w-100" alt="...">
                             <div class="carousel-caption d-none d-md-block">
                                 <h5>Minecraft</h5>
                                 <p>Nova verçao do jogo adiciona varios itens.</p>
@@ -85,7 +85,7 @@
                 <ul type="none">
                     <% listaJogos.forEach(function(item, index){%>
                         <li>
-                            <img src=img/<%= item.foto_jogo %> alt="">
+                            <img src=../img/<%= item.foto_jogo %> alt="">
                             <h1 class="cool-link"><a class="link" href="/jogo/<%=item.id_jogo %>/<%=item.nome_jogo%>"><%= item.nome_jogo %></a></h1>
                             <p> <%= item.resumo_jogo %></p>
                             <h2>Nota:</h2>
