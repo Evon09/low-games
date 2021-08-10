@@ -32,8 +32,15 @@ router.get('/', function (req, res) {
 //rotpara cada jogo
 router.get('/jogo/:id/:nome_jogo', function (req, res) {
 
-    jogo.findByPk(req.params.id).then(function (listaJogos) {
-       res.render('jogos',{listaJogos: listaJogos}); 
+    // jogo.findOne({ id_jogo: req.params.id, nome_jogo: req.params.nome_jogo })
+    jogo.findAll({
+        where: {
+            id_jogo: req.params.id,
+            nome_jogo: req.params.nome_jogo
+        }
+    }).then(function (pagJogo) {
+            //console.log(pagJogo);
+       res.render('jogos',{pagJogo: pagJogo}); 
     });
 
    // res.send(req.params.id + req.params.nome_jogo);
