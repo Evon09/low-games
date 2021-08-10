@@ -27,12 +27,9 @@ header{
 }
 
 
-
-
-
 main{
 
-    background-color: rgb(38, 27, 48);
+    background-color: #1f1335;
     width: 100%;
     min-height: 100vh;
     position:relative;

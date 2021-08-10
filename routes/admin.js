@@ -1,10 +1,14 @@
-const express = require('express')
-var app = express();
-const router = express.Router()
-var jogo = require('../public/Models/tb_jogos');
 var bodyParser = require('body-parser');
 
 
+//bd
+var jogo = require('../public/Models/tb_jogos');
+
+
+//express static files
+const express = require('express')
+var app = express();
+const router = express.Router()
 
 
 //rota para cadastro;

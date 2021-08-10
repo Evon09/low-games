@@ -1,15 +1,15 @@
 //Import e config do express;
 var fs = require('fs');
-var ejs = require('ejs');
 var http = require('http');
-var mysql = require('mysql2');
-var express = require('express');
 const passport = require('passport');
 const session = require('express-session');
 const flash = require('connect-flash');
 const path = require('path');
 require('./auth')(passport);
 
+
+//express static
+var express = require('express');
 var app = express();
 app.use(express.static('public/views'));
 app.use(express.static('public/views/css'));
@@ -17,8 +17,11 @@ app.use(express.static('public/views/img'));
 app.use(express.static('public/Controller'));
 app.use(express.static(__dirname + '/public'));
 
-var sequelize = require('./public/Controller/bancoDeDados');
 
+
+//bd
+var sequelize = require('./public/Controller/bancoDeDados');
+var mysql = require('mysql2');
 
 
 //sesao
@@ -30,40 +33,26 @@ app.use(session({
 app.use(flash());
 
 
-
 //ejs config
+var ejs = require('ejs');
 app.set('views','./public/views');
 app.set('view engine', 'ejs');
 
 
-//tb_jogos;
-
-var bodyParser = require('body-parser');
-
-
 //body-parsers
+var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 
-//public 
-    app.use(express.static(path.join(__dirname, 'public')))
+//public estatic
+app.use(express.static(path.join(__dirname, 'public')))
+
 
 //routes
 const admin = require('./routes/admin');
 const user = require('./routes/user');
 
-//sesao
-// app.use(session({
-//     secret: 'sesao',
-//     reseve: true,
-//     saveUninitialized:true
-// }))
-// app.use(flash());
-//midware
-// app.use((req, res, next) => {
-//         res.locals.msgCerto =req.flash("");
-//     })
 
 //rota admin/user;
 app.use('/admin', admin);

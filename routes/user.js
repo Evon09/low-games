@@ -1,17 +1,25 @@
-const express = require('express')
-var app = express();
-const router = express.Router()
-var user = require('../public/Models/tb_user');
-var jogo = require('../public/Models/tb_jogos');
+//requires
 var bodyParser = require('body-parser');
 const classUser = require('../public/Models/classuser');
 const bcrypt = require('bcryptjs');
 const path = require('path');
+
+
+//bd
+var user = require('../public/Models/tb_user');
+var jogo = require('../public/Models/tb_jogos');
+
+
+//express static
+const express = require('express')
+var app = express();
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.use(express.static('../public/Models'));
+const router = express.Router()
 
 
+
+//index 
 router.get('/', function (req, res) {
     
     jogo.findAll().then(function (listaJogos){
@@ -32,9 +40,6 @@ router.get('/jogo/:id/:nome_jogo', function (req, res) {
 });
 
 
-
-
-
 //rota para login
 router.get('/login', function (req, res){
 
@@ -45,13 +50,13 @@ router.get('/login', function (req, res){
 
 //cadastro usuario
 router.get('/cadastro', function (req, res){
-
-   
-   
     res.render('cadastro');
  
 });
  
+
+
+//Rota que faz o cadastro
 router.post("/cad-user", function (req, res) {
 
   user.findOne({ email_user: req.body.email }).then((usuario) => {
@@ -69,9 +74,8 @@ router.post("/cad-user", function (req, res) {
                     
                     classuser.senha = hash;
 
-                    classuser.salvarCadastro()
+                    classuser.salvarCadastro();
                     res.redirect("/login");
-                   
                       
                 })
             })

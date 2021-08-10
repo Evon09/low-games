@@ -17,24 +17,31 @@
 
     <header>
 
-        <nav class="navbar navbar-dark " style="background-color: #3c3154;">
-
-            <div class="container-fluid">
-                <div class="container">
+        <header>
+            <nav class="navbar navbar-expand-lg navbar-dark" >
+                
+                <div class="container-fluid">
                     <a class="navbar-brand" href="/">
-                        <img src="/img/logo.png" alt="" width="40" class="d-inline-block align-text-top">
+                        <img src="../../img/logo.png" alt="" width="40" class="d-inline-block align-text-top">
                         Low Games
                     </a>
+                  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                      <a class="nav-link active" aria-current="page" href="/">Home</a>
+                      <a class="nav-link" href="/login">Login</a>
+                      <a class="nav-link" href="/">Logout</a>
+                    </div>
+                  </div>
                 </div>
             </div>
-
-        </nav>
+              </nav>
+    
 
     </header>
     <main>
         <div class="container">
             <section class="jogo-avaliado">
-                <img src="img/<%= listaJogos.foto_jogo %>" alt="">
+                <img src="../../img/<%= listaJogos.foto_jogo %>" alt="">
                 <h1><%= listaJogos.nome_jogo %></h1>
                 <p><%= listaJogos.resumo_jogo %></p>
                 <h2>Nota:</h2>
