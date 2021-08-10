@@ -6,7 +6,7 @@
     const jogo = require('../Models/tb_jogos');
     const user = require('../Models/tb_user');
     await database.sync();
-
+    user.findAll({where: { email_user: req.body.email}})
     // const tb_jogos = await jogo.findAll();
     // console.log(tb_jogos);
     // const novojogo = jogo.create({

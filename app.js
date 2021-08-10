@@ -19,13 +19,25 @@ app.use(express.static(__dirname + '/public'));
 
 var sequelize = require('./public/Controller/bancoDeDados');
 
+
+
+//sesao
+app.use(session({
+    secret: 'sesao',
+    reseve: true,
+    saveUninitialized:true
+}))
+app.use(flash());
+
+
+
 //ejs config
 app.set('views','./public/views');
 app.set('view engine', 'ejs');
 
 
 //tb_jogos;
-var jogo = require('./public/Models/tb_jogos');
+
 var bodyParser = require('body-parser');
 
 

@@ -26,6 +26,10 @@ const user = database.define('tb_user', {
         allowNull: false,
 
     },
+    adm_user:{
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
+    },
     peso_user: {
         type: Sequelize.FLOAT,
         allowNull: false,

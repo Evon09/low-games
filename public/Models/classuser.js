@@ -1,5 +1,7 @@
+var userdb = require('./tb_user');
+const Sequelize = require('sequelize');
 
-var user = class user {
+module.exports = class classUser {
 
     userId = null;//Id do usuario
     nome = null;//Nome do usuario
@@ -8,9 +10,9 @@ var user = class user {
     peso = null;//Peso da nota do Usuario
 
 
-    constructor(id, nome, email, senha, nota) {
+    constructor( nome, email, senha, nota) {
 
-        this.userId = id;
+        
         this.nome = nome;
         this.email = email;
         this.senha = senha;
@@ -18,12 +20,19 @@ var user = class user {
 
     }
 
+    salvarCadastro() {
+        
+        userdb.create({
+            nome_user:  this.nome,
+            email_user: this.email,
+            senha_user: this.senha,
+        });
 
+    }
 
 
 }
 
 
+ 
 
-
-module.export = new user();
