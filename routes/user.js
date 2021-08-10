@@ -55,8 +55,9 @@ router.get('/cadastro', function (req, res){
 router.post("/cad-user", function (req, res) {
 
   user.findOne({ email_user: req.body.email }).then((usuario) => {
-        if (!usuario) {
+        if (usuario) {
             console.log("DEU ERRO");
+            res.redirect("/cadastro");
         } else {
             const classuser = new classUser(req.body.nome, req.body.email, req.body.pass);
             bcrypt.genSalt(10, (erro, salt) => {
