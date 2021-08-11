@@ -224,7 +224,7 @@ textarea {
 
     border: 2px solid rgb(163, 37, 37);
     color:rgb(163, 37, 37) ;
-
+    background-color:white;
     /* flex para alinhar conteúdo*/
     display: flex;
     width: 30px;
@@ -240,8 +240,34 @@ textarea {
 
     color: white;
     background-color: rgb(163, 37, 37);
-
+    border: none;
 
 }
 
+/*modal*/
+.edit{
+
+    width: 30px;
+    height: 30px;
+    border-radius: 25px;
+    float:left;
+    margin-top: 50px;
+    background-color:white;
+    border: solid rgb(255, 255, 255);
+}
+
+.edit:hover{
+
+    color:green;
+
+}
+
+.modal-body li{
+
+
+    margin: 0px;
+    padding: 0px;
+    min-height: 0px;
+
+}
 

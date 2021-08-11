@@ -21,7 +21,7 @@ class Controller {
         var resumo = document.getElementById("resumo").value;
         console.log(nome);
         console.log(resumo);
-        if (!this.verificarCampo(nome) && !this.verificarCampo(resumo)) {
+        if (!this.verificarCampo(nome) || !this.verificarCampo(resumo)) {
             window.alert("ERRO Preencha o campo");
             return false;
         } else {
@@ -29,6 +29,21 @@ class Controller {
             return true;
         }
     }
+
+    checkModal() {
+        var nome = document.getElementById("nomeEd").value;
+        var resumo = document.getElementById("resumoEd").value;
+        console.log(nome);
+        console.log(resumo);
+        if (!this.verificarCampo(nome) || !this.verificarCampo(resumo)) {
+            window.alert("ERRO Preencha o campo");
+            return false;
+        } else {
+
+            return true;
+        }
+    }
+
 
     
 

@@ -3,7 +3,7 @@ var bodyParser = require('body-parser');
 
 //bd
 var jogo = require('../public/Models/tb_jogos');
-
+const database = require('../public/Controller/bancoDeDados');
 
 //express static files
 const express = require('express')
@@ -44,6 +44,24 @@ router.post('/remove', (req, res) => {
         id_jogo: req.body.idJogo
         }
     });
+
+    res.redirect('/admin/cadastro-jogos')
+    
+});
+
+//rota para editar
+router.post('/edit', (req, res) => {
+
+    (async () => {
+
+        const edit = await jogo.findByPk(req.body.idEd);
+        edit.nome_jogo = req.body.nomeEd;
+        edit.foto_jogo = req.body.fotoEd;
+        edit.resumo_jogo = req.body.resumoEd;
+        edit.save();
+        console.log(req.body.idEd);
+    
+    })();
 
     res.redirect('/admin/cadastro-jogos')
     

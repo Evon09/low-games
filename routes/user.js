@@ -1,6 +1,6 @@
 //requires
 var bodyParser = require('body-parser');
-const classUser = require('../public/Models/classuser');
+const classUser = require('../public/Models/userClass');
 const bcrypt = require('bcryptjs');
 const path = require('path');
 

@@ -21,7 +21,7 @@ class Controller {
         var email = document.getElementById("email").value;
         var senha = document.getElementById("pass").value;
     
-        if (!this.verificarCampo(nome) && !this.verificarCampo(email)&& !this.verificarCampo(senha)) {
+        if (!this.verificarCampo(nome) || !this.verificarCampo(email) || !this.verificarCampo(senha)) {
             window.alert("ERRO Preencha o campo");
             return false;
         } else {
