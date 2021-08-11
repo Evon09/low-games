@@ -76,40 +76,40 @@
                                 <button type="button" class="edit" data-bs-toggle="modal" data-bs-target="#exampleModal<%= item.id_jogo %>" data-bs-whatever="@getbootstrap"><i class="fas fa-edit"></i></button>
 
                                 <div class="modal fade" id="exampleModal<%= item.id_jogo %>" tabindex="-1"  aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Editar jogo</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                            <form  id="<%= item.id_jogo %> onsubmit="return controller.checkModal();" action="/admin/edit" method="POST">
-                                                <input type="hidden" name="idEd" value="<%= item.id_jogo %>">
-                                                    <div class="mb-3">
-                                                        <label for="recipient-name" class="col-form-label">Nome do Jogo:</label>
-                                                        <input type="text" class="form-control" name="nomeEd" id="nomeEd">
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label>Capa do Jogo: </label>
-                                                        <input type="file" accept="image/png, image/jpeg" name="fotoEd" id="foto">
-                                                        </input>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="message-text" class="col-form-label">Resumo:</label>
-                                                        <textarea class="form-control" name="resumoEd" id="resumoEd"></textarea>
-                                                    </div>
-                                                
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Salvar</button>
-                                                    
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Editar jogo</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                    <form  id="<%= item.id_jogo %> onsubmit="return controller.checkModal();" action="/admin/edit" method="POST">
+                                                        <input type="hidden" name="idEd" value="<%= item.id_jogo %>">
+                                                            <div class="mb-3">
+                                                                <label for="recipient-name" class="col-form-label">Nome do Jogo:</label>
+                                                                <input type="text" class="form-control" name="nomeEd" id="nomeEd">
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label>Capa do Jogo: </label>
+                                                                <input type="file" accept="image/png, image/jpeg" name="fotoEd" id="foto">
+                                                                </input>
+                                                            </div>
+                                                            <div class="mb-3">
+                                                                <label for="message-text" class="col-form-label">Resumo:</label>
+                                                                <textarea class="form-control" name="resumoEd" id="resumoEd"></textarea>
+                                                            </div>
+                                                        
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                            <button type="submit" class="btn btn-primary">Salvar</button>
+                                                            
 
-                                            </form>
-                                    
+                                                    </form>
+                                            
+                                            </div>
+                                        </div>
                                     </div>
-                                    </div>
-                                </div>
                                 </div>
 
          
