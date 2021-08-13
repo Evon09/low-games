@@ -35,7 +35,6 @@ router.get('/', function (req, res) {
 //rotpara cada jogo
 router.get('/jogo/:id', function (req, res) {
 
-        where: {
     
     jogos.findOne({ _id:req.params.id }).then(function (pagJogo) {
         
