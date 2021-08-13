@@ -1,12 +1,21 @@
-const Sequelize = require('sequelize');
+const mongoose = require('mongoose');
 
-//conexao com banco de dados
-const sequelize = new Sequelize("lgames", 'root', '12345678', {
-    host: "localhost",
-    dialect: 'mysql'
+mongoose.Promise= global.Promise;
+mongoDatabase = mongoose.connect("mongodb://localhost/lgames", {
+    useMongoose: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true
+}).then(() => {
+    console.log('Servidor conectado');
+}).catch(() => {
+    console.log('Servidor Com ERRO');
 });
 
 
-module.exports = sequelize;
+
+
+module.exports = mongoDatabase;
+
+
 
 

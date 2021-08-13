@@ -40,15 +40,15 @@
     </header>
     <main>
         <div class="container">
-            <% pagJogo.forEach(function(item, index){%>
+            
             <section class="jogo-avaliado">
-                <img src="../../img/<%= item.foto_jogo %>" alt="">
-                <h1><%= item.nome_jogo %></h1>
-                <p><%= item.resumo_jogo %></p>
+                <img src="<%=pagJogo.foto_game %>" alt="">
+                <h1><%=pagJogo.nome_game %></h1>
+                <p><%=pagJogo.resumo_game %></p>
                 <h2>Nota:</h2>
-                <div class="notas"><%= item.nota_jogo %></div>
+                <div class="notas"><%=pagJogo.nota_game %></div>
             </section>
-            <%});%>
+            
             <div class="jogos">
 
 

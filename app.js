@@ -5,7 +5,7 @@ const passport = require('passport');
 const session = require('express-session');
 const flash = require('connect-flash');
 const path = require('path');
-require('./auth')(passport);
+//require('./auth')(passport);
 
 
 //express static
@@ -20,9 +20,7 @@ app.use(express.static(__dirname + '/public'));
 
 
 //bd
-var sequelize = require('./public/Controller/bancoDeDados');
-var mysql = require('mysql2');
-
+const mongoose = require('mongoose');
 
 //sesao
 app.use(session({

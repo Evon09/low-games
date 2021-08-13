@@ -31,17 +31,34 @@ class Controller {
     }
 
     checkModal() {
-        var nome = document.getElementById("nomeEd").value;
-        var resumo = document.getElementById("resumoEd").value;
-        console.log(nome);
-        console.log(resumo);
-        if (!this.verificarCampo(nome) || !this.verificarCampo(resumo)) {
-            window.alert("ERRO Preencha o campo");
+        
+        var id = document.getElementById("idEd").value;
+        var form = document.getElementById(id);
+        var nome = document.getElementById("nomeEd");
+        //var nome = form.nomeEd;
+       // var resumo = form.resumoEd;
+        !form.nomeEd.value;
+        alert(test);
+       // alert(!form.nomeEd.value);
+      
+
+        if (!form.nomeEd.value || !form.resumoEd.value) {
+            alert(!form.nomeEd.value);
+            alert("[ERRO] Campo vazio");
             return false;
         } else {
-
             return true;
         }
+
+        // alert(id.nomeEd.value);
+        // if ( !nome.value  || !resumo.value) {
+        //     window.alert("ERRO Preencha o campo" + id);
+        //     return false;
+        // } else {
+
+            
+        // }
+      
     }
 
 

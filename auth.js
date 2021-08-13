@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs');
 const localStrategy = require('passport-local').Strategy;
 const user = require('./public/Models/tb_user');
-var mysql = require('mysql2');
+
 
 module.exports = function (passport) {
     

@@ -6,8 +6,11 @@ const path = require('path');
 
 
 //bd
-var user = require('../public/Models/tb_user');
-var jogo = require('../public/Models/tb_jogos');
+const mongoose = require('mongoose');
+require('../public/Models/tb_jogos');
+require('../public/Models/tb_user');
+const jogos = mongoose.model('gamedb');
+const users = mongoose.model('userdb');
 
 
 //express static
@@ -22,7 +25,7 @@ const router = express.Router()
 //index 
 router.get('/', function (req, res) {
     
-    jogo.findAll().then(function (listaJogos){
+    jogos.find().then(function (listaJogos) {
         res.render('index', { listaJogos: listaJogos });
     });
 
@@ -30,26 +33,22 @@ router.get('/', function (req, res) {
 
 
 //rotpara cada jogo
-router.get('/jogo/:id/:nome_jogo', function (req, res) {
+router.get('/jogo/:id', function (req, res) {
 
-    // jogo.findOne({ id_jogo: req.params.id, nome_jogo: req.params.nome_jogo })
-    jogo.findAll({
         where: {
-            id_jogo: req.params.id,
-            nome_jogo: req.params.nome_jogo
-        }
-    }).then(function (pagJogo) {
-            //console.log(pagJogo);
-       res.render('jogos',{pagJogo: pagJogo}); 
+    
+    jogos.findOne({ _id:req.params.id }).then(function (pagJogo) {
+        
+        res.render('jogos',{pagJogo: pagJogo}); 
     });
-
-   // res.send(req.params.id + req.params.nome_jogo);
+        
 });
 
 
 //rota para login
 router.get('/login', function (req, res){
 
+    
    res.render('login');
 
 });
@@ -57,6 +56,7 @@ router.get('/login', function (req, res){
 
 //cadastro usuario
 router.get('/cadastro', function (req, res){
+    
     res.render('cadastro');
  
 });
@@ -66,32 +66,31 @@ router.get('/cadastro', function (req, res){
 //Rota que faz o cadastro
 router.post("/cad-user", function (req, res) {
 
-  user.findOne({ email_user: req.body.email }).then((usuario) => {
+
+    const newUser = new classUser(req.body.nome, req.body.email, req.body.pass, 0);
+
+    users.findOne({ email_user: req.body.email }).then((usuario) => {
+        console.log(usuario);
         if (usuario) {
-            console.log("DEU ERRO");
-            res.redirect("/cadastro");
+
+            console.log("EMAIL ja cadastrado");
+            res.redirect('/cadastro');
+           
         } else {
-            const classuser = new classUser(req.body.nome, req.body.email, req.body.pass);
-            bcrypt.genSalt(10, (erro, salt) => {
-                bcrypt.hash(classuser.senha, salt, (erro, hash) => {
-                    if (erro) {
-                        console.log("DEU ERRO");
-                        res.redirect("/cadastro");
-                    }
-                    
-                    classuser.senha = hash;
-
-                    classuser.salvarCadastro();
-                    res.redirect("/login");
-                      
-                })
-            })
+            
+            if (newUser.hashpass()) {
+                newUser.createUser();
+                res.redirect('/login');
+            } else {
+                res.redirect('/cadastro');
+            }
+            
         }
-    });
-    
-    //res.redirect('/login');
-    
-})
+       
+    })
 
 
+});
+
+    
 module.exports = router

@@ -20,13 +20,15 @@ var jogo = class jogo {
         this.quatidadeAvaliaca = quantidade;
     }
 
+    calNota(nota_user,peso_user) {
+        
+        this.nota = (this.nota + (nota_user * peso_user)) / (this.peso + peso_user);
 
+    }
 
 
 
 }
-
-
 
 
 

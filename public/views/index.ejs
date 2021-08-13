@@ -91,11 +91,11 @@
                 <ul type="none">
                     <% listaJogos.forEach(function(item, index){%>
                         <li>
-                            <img src=../img/<%= item.foto_jogo %> alt="">
-                            <h1 class="cool-link"><a class="link" href="/jogo/<%=item.id_jogo %>/<%=item.nome_jogo%>"><%= item.nome_jogo %></a></h1>
-                            <p> <%= item.resumo_jogo %></p>
+                            <img src="<%= item.foto_game %>" alt="">
+                            <h1 class="cool-link"><a class="link" href="/jogo/<%=item._id %>"><%= item.nome_game %></a></h1>
+                            <p> <%= item.resumo_game %></p>
                             <h2>Nota:</h2>
-                            <div class="notas" > <%= item.nota_jogo %> </div>
+                            <div class="notas" > <%= item.nota_game %> </div>
                             
                         </li>
                     <%});%>

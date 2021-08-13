@@ -1,39 +1,31 @@
-// configurando sequelize/banco de dados;
+const mongoose = require('mongoose');
+const mongoDatabase = require('../Controller/bancoDeDados');
 
-const database = require('../Controller/bancoDeDados');
-const Sequelize = require('sequelize');
 
-// criando o objeto tb_jogo;
-const jogo = database.define('tb_jogos', {
-    id_jogo: {
-        type: Sequelize.INTEGER,
-        autoIncrement: true,
-        allowNull: false,
-        primaryKey: true
+
+
+
+const gameSchema = new mongoose.Schema({
+
+    nome_game: {
+        type: String,
+        required: true
     },
-    nome_jogo: {
-        type: Sequelize.STRING(50),
-        allowNull: false,
-
+    resumo_game: {
+        type: String,  
+        required: true
     },
-    resumo_jogo: {
-        type: Sequelize.TEXT,
-        allowNull: false,
-
-    },
-    nota_jogo: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
+    nota_game: {
+        type: Number,
+        required: true
 
     },
-    foto_jogo: {
-        type: Sequelize.BLOB,
-        allowNull: true,
-
-    }
-
-});
+    foto_game: {
+        type: Buffer,
+    },
 
 
-//export tb_jogo;
-module.exports = jogo;
+})
+
+mongoose.model('gamedb', gameSchema);
+
