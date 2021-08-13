@@ -69,7 +69,7 @@ router.post("/cad-user", function (req, res) {
     const newUser = new classUser(req.body.nome, req.body.email, req.body.pass, 0);
 
     users.findOne({ email_user: req.body.email }).then((usuario) => {
-        console.log(usuario);
+        //console.log(usuario);
         if (usuario) {
 
             console.log("EMAIL ja cadastrado");
