@@ -33,36 +33,23 @@ class Controller {
     checkModal() {
         
         var id = document.getElementById("idEd").value;
-        var form = document.getElementById(id);
-        var nome = document.getElementById("nomeEd");
-        //var nome = form.nomeEd;
-       // var resumo = form.resumoEd;
-        !form.nomeEd.value;
-        alert(test);
-       // alert(!form.nomeEd.value);
-      
-
-        if (!form.nomeEd.value || !form.resumoEd.value) {
-            alert(!form.nomeEd.value);
+        var nomeid = "nomeEd" + id;
+        var resumoid = "resumoEd" + id;
+        var nome = document.getElementById(nomeid).value;
+        var resumo = document.getElementById(resumoid).value;
+        if (resumo || nome) {
             alert("[ERRO] Campo vazio");
             return false;
         } else {
             return true;
         }
 
-        // alert(id.nomeEd.value);
-        // if ( !nome.value  || !resumo.value) {
-        //     window.alert("ERRO Preencha o campo" + id);
-        //     return false;
-        // } else {
-
-            
-        // }
+      
       
     }
 
 
-    
+    resumo6115d777de3ddf4ba418d5e0
 
     
 

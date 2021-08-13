@@ -83,11 +83,11 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                    <form  id="<%= item._id %>" name="<%= item._id %>" onsubmit="return controller.checkModal();" action="/admin/edit" method="POST">
+                                                    <form onsubmit="return controller.checkModal();" action="/admin/edit" method="POST">
                                                         <input type="hidden" name="idEd" id="idEd" value="<%= item._id %>">
                                                             <div class="mb-3">
                                                                 <label for="recipient-name" class="col-form-label">Nome do Jogo:</label>
-                                                                <input type="text" class="form-control" name="nomeEd" id="nomeEd">
+                                                                <input type="text" class="form-control" name="nomeEd" id="nomeEd<%= item._id %>">
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label>Capa do Jogo: </label>
@@ -96,7 +96,7 @@
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label for="message-text" class="col-form-label">Resumo:</label>
-                                                                <textarea class="form-control" name="resumoEd" id="resumoEd"></textarea>
+                                                                <textarea class="form-control" name="resumoEd" id="resumoEd<%= item._id %>"></textarea>
                                                             </div>
                                                         
                                             </div>
