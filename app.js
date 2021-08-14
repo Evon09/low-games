@@ -1,15 +1,16 @@
 //Import e config do express;
+var express = require('express');
 var fs = require('fs');
 var http = require('http');
-const passport = require('passport');
-const session = require('express-session');
-const flash = require('connect-flash');
 const path = require('path');
-//require('./auth')(passport);
+const session = require('express-session');
+const passport = require('passport');
+const localStrategy = require('passport-local').Strategy;
+const flash = require('connect-flash');
 
 
 //express static
-var express = require('express');
+
 var app = express();
 app.use(express.static('public/views'));
 app.use(express.static('public/views/css'));
@@ -21,14 +22,30 @@ app.use(express.static(__dirname + '/public'));
 
 //bd
 const mongoose = require('mongoose');
+require('./public/Models/tb_user');
+//const usersdb = mongoose.model('userdb');
+
 
 //sesao
 app.use(session({
-    secret: 'sesao',
+    secret: 'segredo',
     reseve: true,
-    saveUninitialized:true
+    saveUninitialized: true
 }))
-app.use(flash());
+app.use(passport.initialize())
+app.use(passport.session())
+require('./config/auth')(passport);
+app.use(flash())
+
+// Middleware
+app.use((req, res, next) => {
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash('error_msg');
+    res.locals.user = req.user|| null;
+    //console.log(req.user);
+    next();
+});
+
 
 
 //ejs config

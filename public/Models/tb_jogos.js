@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 const mongoDatabase = require('../Controller/bancoDeDados');
+const Schema = mongoose.Schema;
 
 
 
 
-
-const gameSchema = new mongoose.Schema({
+const gameSchema = new Schema({
 
     nome_game: {
         type: String,

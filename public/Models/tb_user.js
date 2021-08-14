@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const mongoDatabase = require('../Controller/bancoDeDados');
+const Schema = mongoose.Schema;
 
-
-const userSchema = new mongoose.Schema({
+const userSchema = new Schema({
 
     nome_user: {
         type: String,

@@ -1,21 +1,16 @@
-var bodyParser = require('body-parser');
 
-
-//bd
+const express = require('express');
+const router = express.Router();
 const mongoose = require('mongoose');
 require('../public/Models/tb_jogos');
 const jogos = mongoose.model('gamedb');
+var bodyParser = require('body-parser');
+const {adm_user} = require('../helpers/adm_user');
 
-
-
-//express static files
-const express = require('express')
-var app = express();
-const router = express.Router()
 
 
 //rota para cadastro;
-router.get('/cadastro-jogos', function (req, res) {
+router.get('/cadastro-jogos',adm_user, function (req, res) {
 
     jogos.find().then(function (listaJogos) {
         res.render('cadastro-jogos', { listaJogos: listaJogos });
@@ -24,7 +19,7 @@ router.get('/cadastro-jogos', function (req, res) {
 })
 
 //rota responavel por mandar os dados para o banco de dados;
-router.post('/add', (req, res) => {
+router.post('/add',adm_user, (req, res) => {
 
 
     const newGame = {
@@ -48,7 +43,7 @@ router.post('/add', (req, res) => {
 
 
 //rota para remover
-router.post('/remove', (req, res) => {
+router.post('/remove',adm_user, (req, res) => {
 
     jogos.remove({ _id: req.body.idJogo }).then(() => {
         console.log('Jogo Deletado');
@@ -60,7 +55,7 @@ router.post('/remove', (req, res) => {
 });
 
 //rota para editar
-router.post('/edit', (req, res) => {
+router.post('/edit',adm_user,  (req, res) => {
 
 
     jogos.findOne({ _id: req.body.idEd }).then((jogo) => {

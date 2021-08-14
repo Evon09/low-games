@@ -3,7 +3,7 @@ var bodyParser = require('body-parser');
 const classUser = require('../public/Models/userClass');
 const bcrypt = require('bcryptjs');
 const path = require('path');
-
+const passport = require('passport');
 
 //bd
 const mongoose = require('mongoose');
@@ -47,7 +47,6 @@ router.get('/jogo/:id', function (req, res) {
 //rota para login
 router.get('/login', function (req, res){
 
-    
    res.render('login');
 
 });
@@ -60,6 +59,23 @@ router.get('/cadastro', function (req, res){
  
 });
  
+router.get('/logout', function (req, res) {
+    
+    req.logout();
+    res.redirect('/');
+
+
+});
+
+
+//rota para logar usuario
+router.post('/login-user', function (req, res, next) {
+    passport.authenticate('local', {
+        successRedirect: '/',
+        failureRedirect: '/login',
+        failureFlash: true
+    })(req, res, next)
+});
 
 
 //Rota que faz o cadastro
