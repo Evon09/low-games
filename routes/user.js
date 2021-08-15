@@ -1,15 +1,17 @@
 //requires
 var bodyParser = require('body-parser');
-const classUser = require('../public/Models/userClass');
-const classJogo = require('../public/Models/jogoClass');
 const bcrypt = require('bcryptjs');
 const path = require('path');
 const passport = require('passport');
 const express = require('express')
 var app = express();
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static('../public/Models'));
-const router = express.Router()
+const router = express.Router();
+
+
+//Models Class
+const classUser = require('../public/Models/userClass');
+const classJogo = require('../public/Models/jogoClass');
+
 
 //bd
 const mongoose = require('mongoose');
@@ -19,6 +21,11 @@ require('../Database/postDb');
 const jogos = mongoose.model('gamedb');
 const users = mongoose.model('userdb');
 const postdb = mongoose.model('postdb');
+
+
+//express statics
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('../public/Models'));
 
 
 //index 
@@ -73,6 +80,7 @@ router.get('/jogo/:id', function (req, res) {
 
 });
 
+
 router.post('/post-remove', (req, res) => {
 
     
@@ -106,7 +114,6 @@ router.post('/post-remove', (req, res) => {
     
     
 });
-
 
 
 router.post('/add-post', function (req, res) {
@@ -144,8 +151,6 @@ router.post('/add-post', function (req, res) {
 });
 
 
-
-
 //rota para login
 router.get('/login', function (req, res){
 
@@ -161,6 +166,7 @@ router.get('/cadastro', function (req, res){
  
 });
  
+
 router.get('/logout', function (req, res) {
     
     req.logout();
@@ -208,9 +214,6 @@ router.post("/cad-user", function (req, res) {
 
 
 });
-
-    
-
 
 
 module.exports = router

@@ -26,8 +26,8 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 module.exports = upload;
-//express static
 
+//express static
 var app = express();
 app.use(express.static('public/views'));
 app.use(express.static('public/views/css'));
@@ -35,6 +35,7 @@ app.use(express.static('public/views/img'));
 app.use(express.static('public/views/upload'));
 app.use(express.static('public/Controller'));
 app.use(express.static(__dirname + '/public'));
+app.use(express.static(path.join(__dirname, 'public')))
 
 //sesao
 app.use(session({
@@ -57,7 +58,6 @@ app.use((req, res, next) => {
 });
 
 
-
 //ejs config
 var ejs = require('ejs');
 app.set('views','./public/views');
@@ -68,10 +68,6 @@ app.set('view engine', 'ejs');
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
-
-//public estatic
-app.use(express.static(path.join(__dirname, 'public')))
 
 
 //routes
