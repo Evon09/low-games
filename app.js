@@ -6,22 +6,39 @@ const path = require('path');
 const session = require('express-session');
 const passport = require('passport');
 const localStrategy = require('passport-local').Strategy;
+const mongoose = require('mongoose');
 const flash = require('connect-flash');
+require('./public/Models/tb_jogos');
+const jogos = mongoose.model('gamedb');
+const multer = require('multer');
+const storage = multer.diskStorage({
+    
+    destination: (req, file, cb) => {
+        cb(null, __dirname + "/public/Views/upload")
+    },
 
+    filename: (req, file, cb) => {
+        
+        cb(null, file.originalname);
 
+    }
+});
+const upload = multer({ storage });
+
+module.exports = upload;
 //express static
 
 var app = express();
 app.use(express.static('public/views'));
 app.use(express.static('public/views/css'));
 app.use(express.static('public/views/img'));
+app.use(express.static('public/views/upload'));
 app.use(express.static('public/Controller'));
 app.use(express.static(__dirname + '/public'));
 
 
 
 //bd
-const mongoose = require('mongoose');
 require('./public/Models/tb_user');
 //const usersdb = mongoose.model('userdb');
 

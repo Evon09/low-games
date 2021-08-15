@@ -30,10 +30,13 @@
                       <a class="nav-link active" aria-current="page" href="/">Home</a>
 
                       <% if (user) { %>
-                            <a class="nav-link" href="/logout">Logout</a>
+                        <%if(user.adm_user==1){%>
+                            <a class="nav-link" href="/admin/cadastro-jogos">Cadastro</a>
+                            <%}%>
+                        <a class="nav-link" href="/logout">Logout</a>
                         <% } else { %>
-                                <a class="nav-link" href="/login">Login</a>
-                            <% } %>
+                            <a class="nav-link" href="/login">Login</a>
+                        <% } %>
 
 
                    
@@ -52,36 +55,78 @@
         <div class="container">
             
             <section class="jogo-avaliado">
-                <img src="<%=pagJogo.foto_game %>" alt="">
+                <img src="../<%=pagJogo.foto_game %>" alt="">
                 <h1><%=pagJogo.nome_game %></h1>
                 <p><%=pagJogo.resumo_game %></p>
                 <h2>Nota:</h2>
                 <div class="notas"><%=pagJogo.nota_game %></div>
             </section>
             
+
+            
             <div class="jogos">
 
-
+                <%if(!user || postuser !== null){%>
+                    <div class="formulario" style="height:30px"></div>
+                <%}else{%>
                 <div class="formulario">
 
-
-                    <ul type="none">
-
-
-                        <li><label>Resumo: </label><textarea id="resumo" cols="84" rows="8"
-                                style="resize: none"></textarea></li>
-                        <li><label>Nota: </label><input type="number" name="" id="nota" value="10" max="10" min="0">
-                            </input> </li>
-                        <li><button type="reset" id="enviar" class="bntE">Publicar</button>
-                        </li>
-                    </ul>
+                    <form action="/add-post" method="post" onsubmit="return controller.checkForm();">
+                        <ul type="none">
 
 
+                            
+
+                            <input type="hidden" name="id_game" id="id_game" value="<%= pagJogo._id %>">
+                            
+
+
+                            <input type="hidden" name="nota_game" id="nota_game" value="<%= pagJogo.nota_game %>">
+                            <input type="hidden" name="quantidade" id="quantidade" value="<%= pagJogo.quantidade %>">
+                            <input type="hidden" name="notatotal" id="notatotal" value="<%= pagJogo.notaTotal %>">
+                            
+                            
+                            
+                            
+
+                            <li><label>Resumo: </label><textarea id="post" name="post" cols="84" rows="8"
+                                    style="resize: none"></textarea></li>
+                            <li><label>Nota: </label><input type="number" name="nota" id="nota" value="10" max="10" min="0">
+                                </input> </li>
+                            <li><button type="submit" id="enviar" class="bntE">Publicar</button>
+                            </li>
+
+                        </ul>
+
+                    </form>
+                    
 
                 </div>
+                <%}%>
 
                 <section class="jogo">
                     <ul type="none" id="lista">
+              
+                        <ul type="none">
+                            <% posts.forEach(function(item, index){%>
+                                <li>
+                                    <%if( item.id_user == postuser ){%>
+                                        <form id='' action="/post-remove" method="POST">
+                                            <button class="remove" type="submit">X</button>
+                                            <input type="hidden" name="postId" value="<%= item._id %>">
+                                            <input type="hidden" name="id_game" id="id_game" value="<%= pagJogo._id %>">
+                                            <input type="hidden" name="nota" id="nota" value="<%= item.nota %>">
+                                        </form>
+                                        <%}%>
+                                    <h3 class="cool-link"><%= item.nome_user %></h3>
+                                    <p> <%= item.post %></p>
+                                    <h4>Nota:</h4>
+                                    <div class="notas" > <%= item.nota %> </div>
+                                    
+                                </li>
+                            <%});%>
+                        </ul>
+            
                     </ul>
 
                 </section>
@@ -95,7 +140,7 @@
 
     </footer>
 
-
+    <script src="../Controller/ControllerPost.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
         </script>

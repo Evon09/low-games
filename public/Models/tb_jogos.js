@@ -17,13 +17,20 @@ const gameSchema = new Schema({
     },
     nota_game: {
         type: Number,
-        required: true
 
     },
     foto_game: {
-        type: Buffer,
+        type: String
     },
-
+    quantidade: {
+        type: Number,
+        default: 1
+    },
+    notaTotal: {
+        type: Number,
+        default: 0
+    },
+    
 
 })
 

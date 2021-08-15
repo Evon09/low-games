@@ -1,6 +1,7 @@
 //requires
 var bodyParser = require('body-parser');
 const classUser = require('../public/Models/userClass');
+const classJogo = require('../public/Models/jogoClass');
 const bcrypt = require('bcryptjs');
 const path = require('path');
 const passport = require('passport');
@@ -9,8 +10,10 @@ const passport = require('passport');
 const mongoose = require('mongoose');
 require('../public/Models/tb_jogos');
 require('../public/Models/tb_user');
+require('../public/Models/postdb');
 const jogos = mongoose.model('gamedb');
 const users = mongoose.model('userdb');
+const postdb = mongoose.model('postdb');
 
 
 //express static
@@ -25,6 +28,7 @@ const router = express.Router()
 //index 
 router.get('/', function (req, res) {
     
+    
     jogos.find().then(function (listaJogos) {
         res.render('index', { listaJogos: listaJogos });
     });
@@ -35,13 +39,120 @@ router.get('/', function (req, res) {
 //rotpara cada jogo
 router.get('/jogo/:id', function (req, res) {
 
-    
-    jogos.findOne({ _id:req.params.id }).then(function (pagJogo) {
-        
-        res.render('jogos',{pagJogo: pagJogo}); 
-    });
-        
+ 
+    if (req.user == null) {
+            
+        jogos.findOne({ _id:req.params.id }).then(function (pagJogo) {
+            postdb.find({id_game:req.params.id }).then((posts) => {
+                res.render('jogos', { pagJogo: pagJogo, posts: posts, postuser: null });
+
+            });
+                
+        });
+
+
+        }else{
+
+                jogos.findOne({ _id: req.params.id }).then(function (pagJogo) {
+                    postdb.find({  id_game: req.params.id }).then((posts) => {
+                        console.log(posts);
+                        postdb.findOne({ id_user: req.user._id, id_game:req.params.id }).then((postuser) => {
+                            //console.log(postuser.id_user)
+                            res.render('jogos', { pagJogo: pagJogo, posts: posts, postuser: postuser.id_user });
+
+                        }).catch((err) => {
+
+                            res.render('jogos', { pagJogo: pagJogo, posts: posts, postuser: null });
+
+                        })
+                    
+                    
+                    });
+                
+                });
+        }
+
+
 });
+
+router.post('/post-remove', (req, res) => {
+
+    
+    jogos.findOne({ _id: req.body.id_game }).then((jogo) => {
+        
+        jogo.nota_game = (jogo.notaTotal - req.body.nota)/(jogo.quantidade-1);
+        jogo.quantidade = jogo.quantidade-1;
+        jogo.notaTotal = jogo.notaTotal - req.body.nota;
+       
+
+        jogo.save().then(() => {
+            
+            console.log("Editado com sucesso");
+            res.redirect('/jogo/'+req.body.id_game )
+    
+        })
+    })
+
+
+    postdb.remove({ _id: req.body.postId }).then(() => {
+        console.log('Post deletado');
+        res.redirect('/jogo/'+req.body.id_game )
+
+    });
+
+    
+    
+});
+
+
+
+router.post('/add-post', function (req, res) {
+
+    const newPost= {
+        
+        nome_user: req.user.nome_user,
+        nota: req.body.nota,
+        post: req.body.post,
+        id_game: req.body.id_game,
+        id_user:  req.user._id,
+        
+    }
+    console.log(req.user._id);
+
+    new postdb(newPost).save().then(() => {
+        console.log('Post Salvo com sucesso');
+    })
+    const notauser = parseInt(req.body.nota, 10);
+    var quantidade = parseInt(req.body.quantidade, 10);
+    const notatotal = parseInt(req.body.notatotal, 10);
+    const newNota = (notatotal + notauser) / quantidade;
+    console.log(notauser , notatotal , quantidade , newNota);
+    quantidade++;
+    const newNotatotal = notauser + notatotal;
+    console.log(newNotatotal)
+    jogos.findOne({ _id: req.body.id_game }).then((jogo) => {
+        
+        jogo.nota_game = newNota;
+        jogo.quantidade = quantidade;
+        jogo.notaTotal = newNotatotal;
+       
+
+        jogo.save().then(() => {
+            
+            console.log("Editado com sucesso");
+            res.redirect('/jogo/'+req.body.id_game )
+    
+        })
+    })
+    res.redirect('/jogo/' + req.body.id_game);
+ 
+});
+
+
+
+
+
+
 
 
 //rota para login

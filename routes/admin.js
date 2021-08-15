@@ -1,13 +1,22 @@
 
-const express = require('express');
-const router = express.Router();
+
+const path = require('path');
 const mongoose = require('mongoose');
 require('../public/Models/tb_jogos');
 const jogos = mongoose.model('gamedb');
+require('../public/Models/postdb');
+const postdb = mongoose.model('postdb');
 var bodyParser = require('body-parser');
 const {adm_user} = require('../helpers/adm_user');
+const multer = require('multer');
+const upload = require('../app');
 
 
+const express = require('express')
+var app = express();
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('public/views/upload'));
+const router = express.Router()
 
 //rota para cadastro;
 router.get('/cadastro-jogos',adm_user, function (req, res) {
@@ -19,14 +28,14 @@ router.get('/cadastro-jogos',adm_user, function (req, res) {
 })
 
 //rota responavel por mandar os dados para o banco de dados;
-router.post('/add',adm_user, (req, res) => {
+router.post('/add',adm_user,upload.single('foto'), (req, res) => {
 
-
+    console.log(req.file.originalname);
     const newGame = {
         
         nome_game: req.body.nome,
         resumo_game: req.body.resumo,
-        foto_game: req.body.foto,
+        foto_game:  req.file.originalname,
         nota_game: 0
     }
 
@@ -47,22 +56,31 @@ router.post('/remove',adm_user, (req, res) => {
 
     jogos.remove({ _id: req.body.idJogo }).then(() => {
         console.log('Jogo Deletado');
-        res.redirect('/admin/cadastro-jogos');
+        
     });
 
-    
+    postdb.remove({ id_game: req.body.idJogo }).then(() => {
+        
+        console.log('Posts deletados');
+        
+    });
+
+    res.redirect('/admin/cadastro-jogos');
+
     
 });
 
 //rota para editar
-router.post('/edit',adm_user,  (req, res) => {
+router.post('/edit',adm_user, upload.single('fotoEd'), (req, res) => {
 
-
+    //const Newfoto = req.file.originalname;
+    console.log(req.file.originalname);
     jogos.findOne({ _id: req.body.idEd }).then((jogo) => {
         
         jogo.nome_game = req.body.nomeEd;
-        jogo.foto_game = req.body.fotoEd;
+        jogo.foto_game=  req.file.originalname,
         jogo.resumo_game = req.body.resumoEd;
+        
         jogo.save().then(() => {
             
             console.log("Editado com sucesso");

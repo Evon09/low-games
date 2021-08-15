@@ -25,8 +25,11 @@
                   <a class="nav-link active" aria-current="page" href="/">Home</a>
                   
                   <% if (user) { %>
+                    <%if(user.adm_user==1){%>
+                        <a class="nav-link" href="/admin/cadastro-jogos">Cadastro</a>
+                        <%}%>
                     <a class="nav-link" href="/logout">Logout</a>
-                <% } else { %>
+                    <% } else { %>
                         <a class="nav-link" href="/login">Login</a>
                     <% } %>
                 </div>

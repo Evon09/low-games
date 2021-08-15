@@ -1,35 +1,49 @@
 
 
-var jogo = class jogo {
+module.exports =  class classJogo {
 
     jogoId = null;//Id do jogo
-    nome = null;//Nome do jogo
-    resumo = null;//Resumo do jogo
     nota = null;//Nota do jogo
-    foto = null;//Capa do jogo
-    quatidadeAvaliacao = 0;
+    peso = null;//peso media 
 
 
-    constructor(id, nome, resumo, nota,foto , quantidade) {
+
+    constructor(id, nota, peso) {
 
         this.jogoId = id;
-        this.nome = nome;
-        this.resumo = resumo;
         this.nota = nota;
-        this.foto = foto;
-        this.quatidadeAvaliaca = quantidade;
+        this.peso = peso;
     }
 
     calNota(nota_user,peso_user) {
         
-        this.nota = (this.nota + (nota_user * peso_user)) / (this.peso + peso_user);
+        var thisnota = parseInt(this.nota, 10);
+        var thispeso = parseInt(this.peso, 10);
+        var notauser = parseInt(nota_user, 10);
+        var pesouser = parseInt(peso_user, 10);
 
+
+
+        var newNota = (thisnota + notauser * pesouser) / (thispeso + pesouser)
+        console.log(newNota);
+        console.log(parseFloat(newNota));
+
+        return newNota;
     }
 
+    calPeso(peso_user) {
+        
+        var pesouser = parseInt(peso_user, 10);
+        var thispeso = parseInt(this.peso, 10);
+        
+        var newpeso = pesouser + thispeso;
 
+        console.log("-->"+newpeso);
+        return newpeso;
+
+
+    }
 
 }
 
 
-
-module.export = new jogo();

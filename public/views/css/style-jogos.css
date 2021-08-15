@@ -96,7 +96,7 @@ section .notas{
 
 }
 
-section li h2{
+section li h4{
     display: inline;
 }
 
@@ -105,6 +105,7 @@ section li h1{
 
     margin-bottom: 10px;
     font-size: 25px;
+    
 
 }
 
@@ -131,6 +132,7 @@ section li h1{
 #nota{
     width: 50px;
     text-align: center;
+    
 
 }
 
@@ -238,5 +240,39 @@ textarea {
 .jogo-avaliado h2{
 
     display: inline;
+
+}
+
+
+
+.remove{
+
+    border: 2px solid rgb(163, 37, 37);
+    color:rgb(163, 37, 37) ;
+    background-color:white;
+    /* flex para alinhar conteúdo*/
+    display: flex;
+    
+    width: 30px;
+    height: 30px;
+    border-radius:15px ;
+    justify-content: center;
+    align-items: center;
+    transition: 0.2s;
+    
+}
+
+.remove:hover{
+
+    color: white;
+    background-color: rgb(163, 37, 37);
+    border: none;
+
+}
+
+
+.cool-link{
+
+    margin: 10px;
 
 }

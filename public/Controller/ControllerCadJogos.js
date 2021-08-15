@@ -37,7 +37,7 @@ class Controller {
         var resumoid = "resumoEd" + id;
         var nome = document.getElementById(nomeid).value;
         var resumo = document.getElementById(resumoid).value;
-        if (resumo || nome) {
+        if (!resumo || !nome) {
             alert("[ERRO] Campo vazio");
             return false;
         } else {
@@ -47,9 +47,6 @@ class Controller {
       
       
     }
-
-
-    resumo6115d777de3ddf4ba418d5e0
 
     
 
