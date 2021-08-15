@@ -1,22 +1,22 @@
-
-
 const path = require('path');
 const mongoose = require('mongoose');
-require('../public/Models/tb_jogos');
+require('../Database/jogosDb');
 const jogos = mongoose.model('gamedb');
-require('../public/Models/postdb');
+require('../Database/postDb');
 const postdb = mongoose.model('postdb');
 var bodyParser = require('body-parser');
 const {adm_user} = require('../helpers/adm_user');
 const multer = require('multer');
 const upload = require('../app');
-
-
 const express = require('express')
 var app = express();
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static('public/views/upload'));
 const router = express.Router()
+
+
+
+
 
 //rota para cadastro;
 router.get('/cadastro-jogos',adm_user, function (req, res) {
@@ -101,6 +101,9 @@ router.post('/edit',adm_user, upload.single('fotoEd'), (req, res) => {
 
     
 });
+
+
+
 
 
 

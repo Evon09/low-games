@@ -4,43 +4,35 @@ module.exports =  class classJogo {
 
     jogoId = null;//Id do jogo
     nota = null;//Nota do jogo
-    peso = null;//peso media 
+    quantidade = null;//peso media 
+    notaTotal = null;
 
 
-
-    constructor(id, nota, peso) {
+    constructor(id, nota, quantidade, notaTotal) {
 
         this.jogoId = id;
         this.nota = nota;
-        this.peso = peso;
+        this.quantidade = quantidade;
+        this.notaTotal = notaTotal;
     }
 
-    calNota(nota_user,peso_user) {
+    novaNota(notaUser) {
         
-        var thisnota = parseInt(this.nota, 10);
-        var thispeso = parseInt(this.peso, 10);
-        var notauser = parseInt(nota_user, 10);
-        var pesouser = parseInt(peso_user, 10);
-
-
-
-        var newNota = (thisnota + notauser * pesouser) / (thispeso + pesouser)
-        console.log(newNota);
-        console.log(parseFloat(newNota));
-
-        return newNota;
+        var notauser = parseInt(notaUser, 10);
+        var quantidade = parseInt(this.quantidade, 10);
+        var notaTotal = parseInt(this.notaTotal, 10);
+        var novaNota = (notaTotal + notauser) / quantidade;
+        novaNota = parseInt(novaNota, 10);
+        //console.log(novaNota);
+        return novaNota;
     }
 
-    calPeso(peso_user) {
+    novoTotal(notaUser) {
         
-        var pesouser = parseInt(peso_user, 10);
-        var thispeso = parseInt(this.peso, 10);
-        
-        var newpeso = pesouser + thispeso;
+        var notaTotal = parseInt(this.notaTotal, 10);
+        var notauser = parseInt(notaUser, 10);
 
-        console.log("-->"+newpeso);
-        return newpeso;
-
+        return notaTotal + notauser;
 
     }
 

@@ -1,7 +1,9 @@
-var userdb = require('./tb_user');
+var userdb = require('../../Database/userDb');
 const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
 const users = mongoose.model('userdb');
+
+
 
 module.exports = class classUser {
 

@@ -5,24 +5,20 @@ const classJogo = require('../public/Models/jogoClass');
 const bcrypt = require('bcryptjs');
 const path = require('path');
 const passport = require('passport');
-
-//bd
-const mongoose = require('mongoose');
-require('../public/Models/tb_jogos');
-require('../public/Models/tb_user');
-require('../public/Models/postdb');
-const jogos = mongoose.model('gamedb');
-const users = mongoose.model('userdb');
-const postdb = mongoose.model('postdb');
-
-
-//express static
 const express = require('express')
 var app = express();
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static('../public/Models'));
 const router = express.Router()
 
+//bd
+const mongoose = require('mongoose');
+require('../Database/jogosDb');
+require('../Database/userDb');
+require('../Database/postDb');
+const jogos = mongoose.model('gamedb');
+const users = mongoose.model('userdb');
+const postdb = mongoose.model('postdb');
 
 
 //index 
@@ -46,8 +42,12 @@ router.get('/jogo/:id', function (req, res) {
             postdb.find({id_game:req.params.id }).then((posts) => {
                 res.render('jogos', { pagJogo: pagJogo, posts: posts, postuser: null });
 
+            }).catch((err) => {
+                console.log(err)
             });
                 
+        }).catch((err) => {
+            console.log(err)
         });
 
 
@@ -55,9 +55,7 @@ router.get('/jogo/:id', function (req, res) {
 
                 jogos.findOne({ _id: req.params.id }).then(function (pagJogo) {
                     postdb.find({  id_game: req.params.id }).then((posts) => {
-                        console.log(posts);
                         postdb.findOne({ id_user: req.user._id, id_game:req.params.id }).then((postuser) => {
-                            //console.log(postuser.id_user)
                             res.render('jogos', { pagJogo: pagJogo, posts: posts, postuser: postuser.id_user });
 
                         }).catch((err) => {
@@ -86,20 +84,25 @@ router.post('/post-remove', (req, res) => {
        
 
         jogo.save().then(() => {
-            
+
             console.log("Editado com sucesso");
-            res.redirect('/jogo/'+req.body.id_game )
-    
-        })
-    })
 
-
-    postdb.remove({ _id: req.body.postId }).then(() => {
-        console.log('Post deletado');
-        res.redirect('/jogo/'+req.body.id_game )
-
+        }).catch((err) => {
+            console.log("-->"+err)
+        });
+    }).catch((err) => {
+        console.log("-->"+err)
     });
 
+    postdb.remove({ _id: req.body.postId }).then(() => {
+
+        console.log('Post deletado');
+        
+    }).catch((err) => {
+        console.log("-->"+err)
+    });
+
+    res.redirect('/jogo/'+req.body.id_game )
     
     
 });
@@ -108,6 +111,8 @@ router.post('/post-remove', (req, res) => {
 
 router.post('/add-post', function (req, res) {
 
+    const classjogo = new classJogo(req.body.id_game,req.body.nota_game,req.body.quantidade,req.body.notatotal);
+    //console.log(req.body.id_game,req.body.nota_game,req.body.quantidade,req.body.notatotal);
     const newPost= {
         
         nome_user: req.user.nome_user,
@@ -117,40 +122,26 @@ router.post('/add-post', function (req, res) {
         id_user:  req.user._id,
         
     }
-    console.log(req.user._id);
-
     new postdb(newPost).save().then(() => {
         console.log('Post Salvo com sucesso');
     })
-    const notauser = parseInt(req.body.nota, 10);
-    var quantidade = parseInt(req.body.quantidade, 10);
-    const notatotal = parseInt(req.body.notatotal, 10);
-    const newNota = (notatotal + notauser) / quantidade;
-    console.log(notauser , notatotal , quantidade , newNota);
-    quantidade++;
-    const newNotatotal = notauser + notatotal;
-    console.log(newNotatotal)
+    
     jogos.findOne({ _id: req.body.id_game }).then((jogo) => {
         
-        jogo.nota_game = newNota;
-        jogo.quantidade = quantidade;
-        jogo.notaTotal = newNotatotal;
+        jogo.nota_game = classjogo.novaNota(req.body.nota);
+        jogo.quantidade = classjogo.quantidade+1;
+        jogo.notaTotal = classjogo.novoTotal(req.body.nota);
        
 
         jogo.save().then(() => {
             
             console.log("Editado com sucesso");
-            res.redirect('/jogo/'+req.body.id_game )
     
         })
     })
     res.redirect('/jogo/' + req.body.id_game);
  
 });
-
-
-
-
 
 
 
@@ -219,4 +210,7 @@ router.post("/cad-user", function (req, res) {
 });
 
     
+
+
+
 module.exports = router

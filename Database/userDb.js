@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const mongoDatabase = require('../Controller/bancoDeDados');
+const mongoDatabase = require('./bancoDeDados');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({

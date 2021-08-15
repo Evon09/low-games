@@ -8,7 +8,7 @@ const passport = require('passport');
 const localStrategy = require('passport-local').Strategy;
 const mongoose = require('mongoose');
 const flash = require('connect-flash');
-require('./public/Models/tb_jogos');
+require('./Database/jogosDb');
 const jogos = mongoose.model('gamedb');
 const multer = require('multer');
 const storage = multer.diskStorage({
@@ -35,13 +35,6 @@ app.use(express.static('public/views/img'));
 app.use(express.static('public/views/upload'));
 app.use(express.static('public/Controller'));
 app.use(express.static(__dirname + '/public'));
-
-
-
-//bd
-require('./public/Models/tb_user');
-//const usersdb = mongoose.model('userdb');
-
 
 //sesao
 app.use(session({

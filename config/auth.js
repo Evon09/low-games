@@ -4,7 +4,7 @@ const localStrategy = require('passport-local').Strategy
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
-require('../public/Models/tb_user');
+require('../Database/userDb');
 
 const user = mongoose.model('userdb');
 
