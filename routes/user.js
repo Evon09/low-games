@@ -11,14 +11,14 @@ const router = express.Router();
 //Models Class
 const classUser = require('../public/Models/userClass');
 const classJogo = require('../public/Models/jogoClass');
-
+const classPost = require('../public/Models/postClass');
 
 //bd
 const mongoose = require('mongoose');
 require('../Database/jogosDb');
 require('../Database/userDb');
 require('../Database/postDb');
-const jogos = mongoose.model('gamedb');
+const gamedb = mongoose.model('gamedb');
 const users = mongoose.model('userdb');
 const postdb = mongoose.model('postdb');
 
@@ -32,8 +32,8 @@ app.use(express.static('../public/Models'));
 router.get('/', function (req, res) {
     
     
-    jogos.find().then(function (listaJogos) {
-        res.render('index', { listaJogos: listaJogos });
+    gamedb.find().then(function (gamelist) {
+        res.render('index', { gamelist: gamelist });
     });
 
 });
@@ -45,9 +45,9 @@ router.get('/jogo/:id', function (req, res) {
  
     if (req.user == null) {
             
-        jogos.findOne({ _id:req.params.id }).then(function (pagJogo) {
+        gamedb.findOne({ _id:req.params.id }).then(function (pagGame) {
             postdb.find({id_game:req.params.id }).then((posts) => {
-                res.render('jogos', { pagJogo: pagJogo, posts: posts, postuser: null });
+                res.render('Game', { pagGame: pagGame, posts: posts, postUser: null });
 
             }).catch((err) => {
                 console.log(err)
@@ -60,14 +60,14 @@ router.get('/jogo/:id', function (req, res) {
 
         }else{
 
-                jogos.findOne({ _id: req.params.id }).then(function (pagJogo) {
+                gamedb.findOne({ _id: req.params.id }).then(function (pagGame) {
                     postdb.find({  id_game: req.params.id }).then((posts) => {
                         postdb.findOne({ id_user: req.user._id, id_game:req.params.id }).then((postuser) => {
-                            res.render('jogos', { pagJogo: pagJogo, posts: posts, postuser: postuser.id_user });
+                            res.render('Game', { pagGame: pagGame, posts: posts, postUser: postuser.id_user });
 
                         }).catch((err) => {
 
-                            res.render('jogos', { pagJogo: pagJogo, posts: posts, postuser: null });
+                            res.render('Game', { pagGame: pagGame, posts: posts, postUser: null });
 
                         })
                     
@@ -84,31 +84,13 @@ router.get('/jogo/:id', function (req, res) {
 router.post('/post-remove', (req, res) => {
 
 
-    jogos.findOne({ _id: req.body.id_game }).then((jogo) => {
-        
-        jogo.nota_game = ((jogo.notaTotal - req.body.nota) / (jogo.quantidade - 1)).toFixed(1); 
-        jogo.quantidade = jogo.quantidade-1;
-        jogo.notaTotal = jogo.notaTotal - req.body.nota;
-       
+    const classpost = new classPost(req.body.postId);
 
-        jogo.save().then(() => {
+    const classjogo = new classJogo(req.body.id_game);
+    
+    classjogo.removeNote(req.body.note);
 
-            console.log("Editado com sucesso");
-
-        }).catch((err) => {
-            console.log("-->"+err)
-        });
-    }).catch((err) => {
-        console.log("-->"+err)
-    });
-
-    postdb.remove({ _id: req.body.postId }).then(() => {
-
-        console.log('Post deletado');
-        
-    }).catch((err) => {
-        console.log("-->"+err)
-    });
+    classpost.removePost();
 
     res.redirect('/jogo/'+req.body.id_game )
     
@@ -118,12 +100,12 @@ router.post('/post-remove', (req, res) => {
 
 router.post('/add-post', function (req, res) {
 
-    const classjogo = new classJogo(req.body.id_game,req.body.nota_game,req.body.quantidade,req.body.notatotal);
+    const classjogo = new classJogo(req.body.id_game,null,null,null,req.body.note_game,req.body.rating,req.body.total);
     //console.log(req.body.id_game,req.body.nota_game,req.body.quantidade,req.body.notatotal);
     const newPost= {
         
-        nome_user: req.user.nome_user,
-        nota: req.body.nota,
+        userName: req.user.userName,
+        userNote: req.body.note,
         post: req.body.post,
         id_game: req.body.id_game,
         id_user:  req.user._id,
@@ -133,19 +115,8 @@ router.post('/add-post', function (req, res) {
         console.log('Post Salvo com sucesso');
     })
     
-    jogos.findOne({ _id: req.body.id_game }).then((jogo) => {
-        
-        jogo.nota_game = classjogo.novaNota(req.body.nota);
-        jogo.quantidade = classjogo.quantidade + 1;
-        jogo.notaTotal = classjogo.novoTotal(req.body.nota);
-       
-
-        jogo.save().then(() => {
-            
-            console.log("Editado com sucesso");
+    classjogo.addNote(req.body.note);
     
-        })
-    })
     res.redirect('/jogo/' + req.body.id_game);
  
 });

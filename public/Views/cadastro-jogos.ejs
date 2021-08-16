@@ -46,12 +46,12 @@
 
                     <ul type="none">
 
-                        <li> <label>Nome do Jogo: </label> <input type="text" name="nome" id="nome"
+                        <li> <label>Nome do Jogo: </label> <input type="text" name="name" id="name"
                                 placeholder="Nome Game"></input></li>
                         <li><label>Capa do Jogo: </label></label><input type="file" accept="image/png, image/jpeg"
-                                name="foto" id="foto" required></input>
+                                name="photo" id="photo" required></input>
                         </li>
-                        <li><label>Resumo: <textarea name="resumo" id="resumo" cols="84" rows="8"
+                        <li><label>Resumo: <textarea name="summary" id="summary" cols="84" rows="8"
                                 style="resize: none"></textarea></label></li>
                         <!-- <li><label>Nota: </label><input type="number" name="" id="nota" value="10" max="10" min="0"></input> </li> -->
                         <li><button type="submit" id="enviar" class="bntE">Salvar</button>
@@ -66,11 +66,11 @@
 
                 <section class="jogo">
                     <ul type="none" id="lista">
-                        <% listaJogos.forEach(function(item, index){%>
+                        <% gameList.forEach(function(item, index){%>
                             <li>
                                 <form id='' action="/admin/remove" method="POST">
                                 <button class="remove" type="submit">X</button>
-                                <input type="hidden" name="idJogo" value="<%= item._id %>">
+                                <input type="hidden" name="idGame" value="<%= item._id %>">
                                 </form>
 
                                 <button type="button" class="edit" data-bs-toggle="modal" data-bs-target="#exampleModal<%= item._id %>" data-bs-whatever="@getbootstrap"><i class="fas fa-edit"></i></button>
@@ -87,16 +87,16 @@
                                                         <input type="hidden" name="idEd" id="idEd" value="<%= item._id %>">
                                                             <div class="mb-3">
                                                                 <label for="recipient-name" class="col-form-label">Nome do Jogo:</label>
-                                                                <input type="text" class="form-control" name="nomeEd" id="nomeEd<%= item._id %>" value="<%= item.nome_game %>" >
+                                                                <input type="text" class="form-control" name="nameEd" id="nomeEd<%= item._id %>" value="<%= item.name %>" >
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label>Capa do Jogo: </label>
-                                                                <input type="file" accept="image/png, image/jpeg" name="fotoEd" id="fotoEd" required>
+                                                                <input type="file" accept="image/png, image/jpeg" name="photoEd" id="photoEd" required>
                                                                 </input>
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label for="message-text" class="col-form-label">Resumo:</label>
-                                                                <textarea class="form-control" name="resumoEd" id="resumoEd<%= item._id %>" > <%= item.resumo_game %> </textarea>
+                                                                <textarea class="form-control" name="summaryEd" id="resumoEd<%= item._id %>" > <%= item.summary %> </textarea>
                                                             </div>
                                                         
                                             </div>
@@ -113,12 +113,12 @@
                                 </div>
 
          
-                                <img src="../<%= item.foto_game %>" alt="">
-                                <h1><%= item.nome_game %></h1>
+                                <img src="../<%= item.photo %>" alt="">
+                                <h1><%= item.name %></h1>
                                 
-                                <p> <%= item.resumo_game %></p>
+                                <p> <%= item.summary %></p>
                                 <h2>Nota:</h2>
-                                <div class="notas"><%= item.nota_game %></div>
+                                <div class="notas"><%= item.note %></div>
                             
                             </li>
                             <%});%>

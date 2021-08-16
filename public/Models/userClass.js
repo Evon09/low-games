@@ -26,9 +26,9 @@ module.exports = class classUser {
     createUser() {
         
         const newUser = {
-            nome_user: this.nome,
+            userName: this.nome,
             email_user: this.email,
-            senha_user: this.senha
+            pass: this.senha
         }
     
         new users(newUser).save().then(() => {

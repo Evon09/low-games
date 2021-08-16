@@ -96,13 +96,13 @@
             <section class="jogos">
                 <h3>Jogos Disponiveis:</h3>
                 <ul type="none">
-                    <% listaJogos.forEach(function(item, index){%>
+                    <% gamelist.forEach(function(item, index){%>
                         <li>
-                            <img src="<%= item.foto_game %>" alt="">
-                            <h1 class="cool-link"><a class="link" href="/jogo/<%=item._id %>"><%= item.nome_game %></a></h1>
-                            <p> <%= item.resumo_game %></p>
+                            <img src="<%= item.photo %>" alt="">
+                            <h1 class="cool-link"><a class="link" href="/jogo/<%=item._id %>"><%= item.name %></a></h1>
+                            <p> <%= item.summary %></p>
                             <h2>Nota:</h2>
-                            <div class="notas" > <%= item.nota_game %> </div>
+                            <div class="notas" > <%= item.note %> </div>
                             
                         </li>
                     <%});%>

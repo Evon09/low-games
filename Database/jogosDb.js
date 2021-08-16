@@ -7,26 +7,26 @@ const Schema = mongoose.Schema;
 
 const gameSchema = new Schema({
 
-    nome_game: {
+    name: {
         type: String,
         required: true
     },
-    resumo_game: {
+    summary: {
         type: String,  
         required: true
     },
-    nota_game: {
+    note: {
         type: Number,
 
     },
-    foto_game: {
+    photo: {
         type: String
     },
-    quantidade: {
+    rating: {
         type: Number,
         default: 1
     },
-    notaTotal: {
+    total: {
         type: Number,
         default: 0
     },

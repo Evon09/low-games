@@ -10,7 +10,7 @@ const user = mongoose.model('userdb');
 
 module.exports = function(passport) {
 
-    passport.use(new localStrategy({usernameField: 'email', passwordField: 'senha'}, (email_user, senha_user, done) => {
+    passport.use(new localStrategy({usernameField: 'email', passwordField: 'pass'}, (email_user, pass, done) => {
 
         user.findOne({ email_user: email_user }).then((user) => {
             console.log(user);
@@ -19,7 +19,7 @@ module.exports = function(passport) {
                 return done(null, false, {message: 'Conta inexistente'})
             }
 
-            bcrypt.compare(senha_user, user.senha_user, (erro, equal) => {
+            bcrypt.compare(pass, user.pass, (erro, equal) => {
                 if(equal) {
                     return done(null, user)
                 } else {

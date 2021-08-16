@@ -4,11 +4,11 @@ const Schema = mongoose.Schema;
 
 const postSchema = new Schema({
 
-    nome_user: {
+    userName: {
         type:String,
         required: true
     },
-    nota: {
+    userNote: {
         type: Number,  
         required: true
     },

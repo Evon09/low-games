@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
 
-    nome_user: {
+    userName: {
         type: String,
         required: true
     },
@@ -12,7 +12,7 @@ const userSchema = new Schema({
         type: String,  
         required: true
     },
-    senha_user: {
+    pass: {
         type: String,
         required: true
 
@@ -22,7 +22,7 @@ const userSchema = new Schema({
         required: true,
         default: false
     },
-    peso_user: {
+    valUser: {
         type: Number,
         required: true,
         default: 1

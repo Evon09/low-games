@@ -55,18 +55,18 @@
         <div class="container">
             
             <section class="jogo-avaliado">
-                <img src="../<%=pagJogo.foto_game %>" alt="">
-                <h1><%=pagJogo.nome_game %></h1>
-                <p><%=pagJogo.resumo_game %></p>
+                <img src="../<%=pagGame.photo %>" alt="">
+                <h1><%=pagGame.name %></h1>
+                <p><%=pagGame.summary %></p>
                 <h2>Nota:</h2>
-                <div class="notas"><%=pagJogo.nota_game %></div>
+                <div class="notas"><%=pagGame.note %></div>
             </section>
             
 
             
             <div class="jogos">
 
-                <%if(!user || postuser !== null){%>
+                <%if(!user || postUser !== null){%>
                     <div class="formulario" style="height:30px"></div>
                 <%}else{%>
                 <div class="formulario">
@@ -77,13 +77,13 @@
 
                             
 
-                            <input type="hidden" name="id_game" id="id_game" value="<%= pagJogo._id %>">
+                            <input type="hidden" name="id_game" id="id_game" value="<%= pagGame._id %>">
                             
 
 
-                            <input type="hidden" name="nota_game" id="nota_game" value="<%= pagJogo.nota_game %>">
-                            <input type="hidden" name="quantidade" id="quantidade" value="<%= pagJogo.quantidade %>">
-                            <input type="hidden" name="notatotal" id="notatotal" value="<%= pagJogo.notaTotal %>">
+                            <input type="hidden" name="note_game" id="note_game" value="<%= pagGame.note %>">
+                            <input type="hidden" name="rating" id="rating" value="<%= pagGame.rating %>">
+                            <input type="hidden" name="total" id="total" value="<%= pagGame.total %>">
                             
                             
                             
@@ -91,7 +91,7 @@
 
                             <li><label>Resumo: </label><textarea id="post" name="post" cols="84" rows="8"
                                     style="resize: none"></textarea></li>
-                            <li><label>Nota: </label><input type="number" name="nota" id="nota" value="10" max="10" min="0">
+                            <li><label>Nota: </label><input type="number" name="note" id="note" value="10" max="10" min="0">
                                 </input> </li>
                             <li><button type="submit" id="enviar" class="bntE">Publicar</button>
                             </li>
@@ -110,18 +110,18 @@
                         <ul type="none">
                             <% posts.forEach(function(item, index){%>
                                 <li>
-                                    <%if( item.id_user == postuser ){%>
+                                    <%if( item.id_user == postUser ){%>
                                         <form id='' action="/post-remove" method="POST">
                                             <button class="remove" type="submit">X</button>
                                             <input type="hidden" name="postId" value="<%= item._id %>">
-                                            <input type="hidden" name="id_game" id="id_game" value="<%= pagJogo._id %>">
-                                            <input type="hidden" name="nota" id="nota" value="<%= item.nota %>">
+                                            <input type="hidden" name="id_game" id="id_game" value="<%= pagGame._id %>">
+                                            <input type="hidden" name="note" id="note" value="<%= item.userNote %>">
                                         </form>
                                         <%}%>
-                                    <h3 class="cool-link"><%= item.nome_user %></h3>
+                                    <h3 class="cool-link"><%= item.userName %></h3>
                                     <p> <%= item.post %></p>
                                     <h4>Nota:</h4>
-                                    <div class="notas" > <%= item.nota %> </div>
+                                    <div class="notas" > <%= item.userNote %> </div>
                                     
                                 </li>
                             <%});%>
