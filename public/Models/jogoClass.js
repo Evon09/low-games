@@ -5,14 +5,13 @@ module.exports =  class classJogo {
     jogoId = null;//Id do jogo
     nota = null;//Nota do jogo
     quantidade = null;//peso media 
-    notaTotal = null;
-
+    notaTotal = null;//Total de nota
 
     constructor(id, nota, quantidade, notaTotal) {
 
         this.jogoId = id;
         this.nota = nota;
-        this.quantidade = quantidade;
+        this.quantidade = parseInt(quantidade, 10);
         this.notaTotal = notaTotal;
     }
 
@@ -22,8 +21,8 @@ module.exports =  class classJogo {
         var quantidade = parseInt(this.quantidade, 10);
         var notaTotal = parseInt(this.notaTotal, 10);
         var novaNota = (notaTotal + notauser) / quantidade;
-        novaNota = parseInt(novaNota, 10);
         //console.log(novaNota);
+        novaNota = parseFloat(novaNota.toFixed(1));
         return novaNota;
     }
 

@@ -83,10 +83,10 @@ router.get('/jogo/:id', function (req, res) {
 
 router.post('/post-remove', (req, res) => {
 
-    
+
     jogos.findOne({ _id: req.body.id_game }).then((jogo) => {
         
-        jogo.nota_game = (jogo.notaTotal - req.body.nota)/(jogo.quantidade-1);
+        jogo.nota_game = ((jogo.notaTotal - req.body.nota) / (jogo.quantidade - 1)).toFixed(1); 
         jogo.quantidade = jogo.quantidade-1;
         jogo.notaTotal = jogo.notaTotal - req.body.nota;
        
@@ -136,7 +136,7 @@ router.post('/add-post', function (req, res) {
     jogos.findOne({ _id: req.body.id_game }).then((jogo) => {
         
         jogo.nota_game = classjogo.novaNota(req.body.nota);
-        jogo.quantidade = classjogo.quantidade+1;
+        jogo.quantidade = classjogo.quantidade + 1;
         jogo.notaTotal = classjogo.novoTotal(req.body.nota);
        
 
