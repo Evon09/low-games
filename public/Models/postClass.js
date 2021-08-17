@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-require('../../Database/jogosDb');
+require('../../Database/gameDb');
 const gamedb = mongoose.model('gamedb');
 require('../../Database/postDb');
 const postdb = mongoose.model('postdb');

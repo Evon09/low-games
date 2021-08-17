@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const mongoDatabase = require('./bancoDeDados');
+const mongoDatabase = require('./database');
 const Schema = mongoose.Schema;
 
 const postSchema = new Schema({

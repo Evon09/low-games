@@ -6,7 +6,7 @@ const upload = require('../app');
 const express = require('express')
 var app = express();
 const router = express.Router()
-const classJogo = require('../public/Models/jogoClass');
+const classJogo = require('../public/Models/gameClass');
 const classPost = require('../public/Models/postClass');
 
 
@@ -16,7 +16,7 @@ app.use(express.static('public/views/upload'));
 
 //db
 const mongoose = require('mongoose');
-require('../Database/jogosDb');
+require('../Database/gameDb');
 const gamedb = mongoose.model('gamedb');
 require('../Database/postDb');
 const postdb = mongoose.model('postdb');
@@ -26,7 +26,7 @@ const postdb = mongoose.model('postdb');
 router.get('/cadastro-jogos',adm_user, function (req, res) {
 
     gamedb.find().then(function (gameList) {
-        res.render('cadastro-jogos', { gameList: gameList });
+        res.render('game-register', { gameList: gameList });
     });
     
 })
@@ -40,7 +40,8 @@ router.post('/add',adm_user,upload.single('photo'), (req, res) => {
         name: req.body.name,
         summary: req.body.summary,
         photo:  req.file.originalname,
-        note: 0
+        note: 0,
+        rating: 0,
     }
 
     new gamedb(newGame).save().then(() => {

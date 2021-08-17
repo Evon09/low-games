@@ -114,8 +114,11 @@
                                         <form id='' action="/post-remove" method="POST">
                                             <button class="remove" type="submit">X</button>
                                             <input type="hidden" name="postId" value="<%= item._id %>">
-                                            <input type="hidden" name="id_game" id="id_game" value="<%= pagGame._id %>">
                                             <input type="hidden" name="note" id="note" value="<%= item.userNote %>">
+                                            <input type="hidden" name="id_game" id="id_game" value="<%= pagGame._id %>">
+                                            <input type="hidden" name="note_game" id="note_game" value="<%= pagGame.note %>">
+                                            <input type="hidden" name="rating" id="rating" value="<%= pagGame.rating %>">
+                                            <input type="hidden" name="total" id="total" value="<%= pagGame.total %>">
                                         </form>
                                         <%}%>
                                     <h3 class="cool-link"><%= item.userName %></h3>

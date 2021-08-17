@@ -10,12 +10,12 @@ const router = express.Router();
 
 //Models Class
 const classUser = require('../public/Models/userClass');
-const classJogo = require('../public/Models/jogoClass');
+const classJogo = require('../public/Models/gameClass');
 const classPost = require('../public/Models/postClass');
 
 //bd
 const mongoose = require('mongoose');
-require('../Database/jogosDb');
+require('../Database/gameDb');
 require('../Database/userDb');
 require('../Database/postDb');
 const gamedb = mongoose.model('gamedb');
@@ -83,14 +83,13 @@ router.get('/jogo/:id', function (req, res) {
 
 router.post('/post-remove', (req, res) => {
 
-
     const classpost = new classPost(req.body.postId);
-
-    const classjogo = new classJogo(req.body.id_game);
-    
-    classjogo.removeNote(req.body.note);
-
     classpost.removePost();
+
+    const classjogo = new classJogo(req.body.id_game,null,null,null,req.body.note_game,req.body.rating,req.body.total);
+
+    classjogo.noteRemove(parseInt(req.body.note,10));
+
 
     res.redirect('/jogo/'+req.body.id_game )
     
@@ -131,7 +130,7 @@ router.get('/login', function (req, res){
 
 
 //cadastro usuario
-router.get('/cadastro', function (req, res){
+router.get('/user-register', function (req, res){
     
     res.render('cadastro');
  

@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
-require('../../Database/jogosDb');
+require('../../Database/gameDb');
 const gamedb = mongoose.model('gamedb');
 require('../../Database/postDb');
-const postdb = mongoose.model('postdb');
+
 
 
 module.exports =  class classJogo {
@@ -11,7 +11,7 @@ module.exports =  class classJogo {
     name = null;
     photo = null;
     summary = null;
-    note = null;//Nota do jogo
+    note = 0;//Nota do jogo
     rating = null;//peso media 
     total = null;//Total de nota
     
@@ -23,7 +23,7 @@ module.exports =  class classJogo {
         this.name = name;
         this.summary = summary;
         this.photo = photo;
-        this.note = note;
+        this.note = parseFloat(note,10);
         this.rating = parseInt(rating, 10);
         this.total = total;
         
@@ -72,29 +72,64 @@ module.exports =  class classJogo {
     }
 
 
-    removeNote(userNote) {
+   
 
-        
+  
+    noteRemove(userNote) {
+
+        console.log(parseInt(this.note,10));
+        this.removeNote(userNote);
+        this.removeTotal(userNote);
+
         gamedb.findOne({ _id: this.gameId }).then((game) => {
         
-            game.note = (game.total - userNote)/(game.rating -1);
-            game.rating = game.rating-1;
-            game.total = game.total - userNote;
+            game.note =  this.note;
+            game.rating = this.rating - 1;
+            game.total = this.total;
            
     
             game.save().then(() => {
-    
+                
                 console.log("Editado com sucesso");
-    
+        
             }).catch((err) => {
-                console.log("-->"+err)
-            });
-        }).catch((err) => {
-            console.log("-->"+err)
-        });
+                console.log("-->"+err);
+            })
+        })
+
+        console.log("Teste 123",this.total,parseInt(this.note,10));
 
 
     }
+
+    removeNote(userNote) {
+        
+        var noteUser = parseInt(userNote, 10);
+        var rating = parseInt(this.rating, 10);
+        var total = parseInt(this.total, 10);
+        var noteNew = (total - noteUser) / (rating - 1);
+        var note = parseInt(noteNew, 10)
+        if (Number.isNaN(note)) {
+            this.note = 0;
+        } else {
+            this.note = note;
+        }
+        
+        console.log(this.note);
+
+    }
+
+    removeTotal(userNote) {
+        
+        var noteTotal = parseInt(this.total, 10);
+        var noteUser = parseInt(userNote, 10);
+        var totalNew = noteTotal - noteUser;
+        totalNew = parseInt(totalNew, 10);
+        this.total = totalNew;
+        console.log(this.total);
+    }
+
+
 
 
     addNote(userNote) {

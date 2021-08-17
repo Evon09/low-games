@@ -8,7 +8,7 @@ const passport = require('passport');
 const localStrategy = require('passport-local').Strategy;
 const mongoose = require('mongoose');
 const flash = require('connect-flash');
-require('./Database/jogosDb');
+require('./Database/gameDb');
 const jogos = mongoose.model('gamedb');
 const multer = require('multer');
 const storage = multer.diskStorage({

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const mongoDatabase = require('./bancoDeDados');
+const mongoDatabase = require('./database');
 const Schema = mongoose.Schema;
 
 
@@ -17,14 +17,14 @@ const gameSchema = new Schema({
     },
     note: {
         type: Number,
-
+        required: false
     },
     photo: {
         type: String
     },
     rating: {
         type: Number,
-        default: 1
+        default: 0
     },
     total: {
         type: Number,
