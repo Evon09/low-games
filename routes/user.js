@@ -86,9 +86,9 @@ router.post('/post-remove', (req, res) => {
     const classpost = new classPost(req.body.postId);
     classpost.removePost();
 
-    const classjogo = new classJogo(req.body.id_game,null,null,null,req.body.note_game,req.body.rating,req.body.total);
+    const classjogo = new classJogo(req.body.id_game,null,null,null,req.body.Score_game,req.body.rating,req.body.total);
 
-    classjogo.noteRemove(parseInt(req.body.note,10));
+    classjogo.ScoreRemove(parseInt(req.body.Score,10));
 
 
     res.redirect('/jogo/'+req.body.id_game )
@@ -99,12 +99,12 @@ router.post('/post-remove', (req, res) => {
 
 router.post('/add-post', function (req, res) {
 
-    const classjogo = new classJogo(req.body.id_game,null,null,null,req.body.note_game,req.body.rating,req.body.total);
+    const classjogo = new classJogo(req.body.id_game,null,null,null,req.body.Score_game,req.body.rating,req.body.total);
     //console.log(req.body.id_game,req.body.nota_game,req.body.quantidade,req.body.notatotal);
     const newPost= {
         
         userName: req.user.userName,
-        userNote: req.body.note,
+        userScore: req.body.Score,
         post: req.body.post,
         id_game: req.body.id_game,
         id_user:  req.user._id,
@@ -114,7 +114,7 @@ router.post('/add-post', function (req, res) {
         console.log('Post Salvo com sucesso');
     })
     
-    classjogo.addNote(req.body.note);
+    classjogo.addScore(req.body.Score);
     
     res.redirect('/jogo/' + req.body.id_game);
  
@@ -132,7 +132,7 @@ router.get('/login', function (req, res){
 //cadastro usuario
 router.get('/user-register', function (req, res){
     
-    res.render('cadastro');
+    res.render('user-register');
  
 });
  

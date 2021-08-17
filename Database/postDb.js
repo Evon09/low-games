@@ -8,7 +8,7 @@ const postSchema = new Schema({
         type:String,
         required: true
     },
-    userNote: {
+    userScore: {
         type: Number,  
         required: true
     },

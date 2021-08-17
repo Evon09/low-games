@@ -11,24 +11,21 @@ module.exports =  class classJogo {
     name = null;
     photo = null;
     summary = null;
-    note = 0;//Nota do jogo
+    Score = 0;//Nota do jogo
     rating = null;//peso media 
     total = null;//Total de nota
-    
 
-
-    constructor(id, name,summary,photo,note, rating, total) {
+    constructor(id, name,summary,photo,Score, rating, total) {
 
         this.gameId = id;
         this.name = name;
         this.summary = summary;
         this.photo = photo;
-        this.note = parseFloat(note,10);
+        this.Score = parseFloat(Score,10);
         this.rating = parseInt(rating, 10);
         this.total = total;
         
     }
-
 
     removeGame() {
         
@@ -39,7 +36,6 @@ module.exports =  class classJogo {
         });
 
     }
-
 
     editGame() {
         
@@ -71,19 +67,15 @@ module.exports =  class classJogo {
 
     }
 
+    ScoreRemove(userScore) {
 
-   
-
-  
-    noteRemove(userNote) {
-
-        console.log(parseInt(this.note,10));
-        this.removeNote(userNote);
-        this.removeTotal(userNote);
+        console.log(parseInt(this.Score,10));
+        this.removeScore(userScore);
+        this.removeTotal(userScore);
 
         gamedb.findOne({ _id: this.gameId }).then((game) => {
         
-            game.note =  this.note;
+            game.Score =  this.Score;
             game.rating = this.rating - 1;
             game.total = this.total;
            
@@ -97,49 +89,46 @@ module.exports =  class classJogo {
             })
         })
 
-        console.log("Teste 123",this.total,parseInt(this.note,10));
+        console.log("Teste 123",this.total,parseInt(this.Score,10));
 
 
     }
 
-    removeNote(userNote) {
+    removeScore(userScore) {
         
-        var noteUser = parseInt(userNote, 10);
+        var ScoreUser = parseInt(userScore, 10);
         var rating = parseInt(this.rating, 10);
         var total = parseInt(this.total, 10);
-        var noteNew = (total - noteUser) / (rating - 1);
-        var note = parseInt(noteNew, 10)
-        if (Number.isNaN(note)) {
-            this.note = 0;
+        var ScoreNew = (total - ScoreUser) / (rating - 1);
+        var Score = parseInt(ScoreNew, 10)
+        if (Number.isNaN(Score)) {
+            this.Score = 0;
         } else {
-            this.note = note;
+            this.Score = Score;
         }
         
-        console.log(this.note);
+        console.log(this.Score);
 
     }
 
-    removeTotal(userNote) {
+    removeTotal(userScore) {
         
-        var noteTotal = parseInt(this.total, 10);
-        var noteUser = parseInt(userNote, 10);
-        var totalNew = noteTotal - noteUser;
+        var ScoreTotal = parseInt(this.total, 10);
+        var ScoreUser = parseInt(userScore, 10);
+        var totalNew = ScoreTotal - ScoreUser;
         totalNew = parseInt(totalNew, 10);
         this.total = totalNew;
         console.log(this.total);
     }
 
-
-
-
-    addNote(userNote) {
+    addScore(userScore) {
         
-        this.newNote(userNote);
-        this.newTotal(userNote);
+        this.newScore(userScore);
+        this.newTotal(userScore);
 
         gamedb.findOne({ _id: this.gameId }).then((game) => {
         
-            game.note = this.note;
+            game.Score = this.Score;
             game.rating = this.rating + 1;
             game.total = this.total;
            
@@ -156,33 +145,26 @@ module.exports =  class classJogo {
 
     }
 
-
-
-    newNote(userNote) {
+    newScore(userScore) {
         
-        var noteUser = parseInt(userNote, 10);
+        var ScoreUser = parseInt(userScore, 10);
         var rating = parseInt(this.rating, 10);
         var total = parseInt(this.total, 10);
-        var noteNew = (total + noteUser) / (rating + 1);
-        var note = parseFloat(noteNew.toFixed(1), 10)
+        var ScoreNew = (total + ScoreUser) / (rating + 1);
+        var Score = parseFloat(ScoreNew.toFixed(1), 10)
         
-        this.note =  note;
+        this.Score =  Score;
     }
 
-    newTotal(userNote) {
+    newTotal(userScore) {
         
-        var noteTotal = parseInt(this.total, 10);
-        var noteUser = parseInt(userNote, 10);
-        var totalNew = noteTotal + noteUser;
+        var ScoreTotal = parseInt(this.total, 10);
+        var ScoreUser = parseInt(userScore, 10);
+        var totalNew = ScoreTotal + ScoreUser;
         totalNew = parseInt(totalNew, 10);
         this.total = totalNew;
 
     }
-
-
-
-
-
 
 }
 

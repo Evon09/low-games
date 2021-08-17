@@ -40,7 +40,7 @@ router.post('/add',adm_user,upload.single('photo'), (req, res) => {
         name: req.body.name,
         summary: req.body.summary,
         photo:  req.file.originalname,
-        note: 0,
+        Score: 0,
         rating: 0,
     }
 

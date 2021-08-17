@@ -15,7 +15,7 @@ const gameSchema = new Schema({
         type: String,  
         required: true
     },
-    note: {
+    Score: {
         type: Number,
         required: false
     },

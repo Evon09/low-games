@@ -59,7 +59,7 @@
                 <h1><%=pagGame.name %></h1>
                 <p><%=pagGame.summary %></p>
                 <h2>Nota:</h2>
-                <div class="notas"><%=pagGame.note %></div>
+                <div class="notas"><%=pagGame.Score %></div>
             </section>
             
 
@@ -81,7 +81,7 @@
                             
 
 
-                            <input type="hidden" name="note_game" id="note_game" value="<%= pagGame.note %>">
+                            <input type="hidden" name="Score_game" id="Score_game" value="<%= pagGame.Score %>">
                             <input type="hidden" name="rating" id="rating" value="<%= pagGame.rating %>">
                             <input type="hidden" name="total" id="total" value="<%= pagGame.total %>">
                             
@@ -91,7 +91,7 @@
 
                             <li><label>Resumo: </label><textarea id="post" name="post" cols="84" rows="8"
                                     style="resize: none"></textarea></li>
-                            <li><label>Nota: </label><input type="number" name="note" id="note" value="10" max="10" min="0">
+                            <li><label>Nota: </label><input type="number" name="Score" id="Score" value="10" max="10" min="0">
                                 </input> </li>
                             <li><button type="submit" id="enviar" class="bntE">Publicar</button>
                             </li>
@@ -114,9 +114,9 @@
                                         <form id='' action="/post-remove" method="POST">
                                             <button class="remove" type="submit">X</button>
                                             <input type="hidden" name="postId" value="<%= item._id %>">
-                                            <input type="hidden" name="note" id="note" value="<%= item.userNote %>">
+                                            <input type="hidden" name="Score" id="Score" value="<%= item.userScore %>">
                                             <input type="hidden" name="id_game" id="id_game" value="<%= pagGame._id %>">
-                                            <input type="hidden" name="note_game" id="note_game" value="<%= pagGame.note %>">
+                                            <input type="hidden" name="Score_game" id="Score_game" value="<%= pagGame.Score %>">
                                             <input type="hidden" name="rating" id="rating" value="<%= pagGame.rating %>">
                                             <input type="hidden" name="total" id="total" value="<%= pagGame.total %>">
                                         </form>
@@ -124,7 +124,7 @@
                                     <h3 class="cool-link"><%= item.userName %></h3>
                                     <p> <%= item.post %></p>
                                     <h4>Nota:</h4>
-                                    <div class="notas" > <%= item.userNote %> </div>
+                                    <div class="notas" > <%= item.userScore %> </div>
                                     
                                 </li>
                             <%});%>
