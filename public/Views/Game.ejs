@@ -56,7 +56,7 @@
         <div class="container">
             
             <section class="jogo-avaliado">
-                <img src="../<%=pagGame.photo %>" alt="">
+                <img src="../<%= pagGame.photo %>" alt="">
                 <h1><%=pagGame.name %></h1>
                 <p><%=pagGame.summary %></p>
                 <h2>Nota:</h2>
@@ -67,27 +67,15 @@
             
             <div class="jogos">
 
-                <%if(!user || postUser !== null){%>
+                <%if(!user || postUser !== null ){%>
                     <div class="formulario" style="height:30px"></div>
+
                 <%}else{%>
                 <div class="formulario">
 
                     <form action="/add-post" method="post" onsubmit="return controller.checkForm();">
                         <ul type="none">
-
-
-                            
-
                             <input type="hidden" name="id_game" id="id_game" value="<%= pagGame._id %>">
-                            
-
-
-                            <input type="hidden" name="Score_game" id="Score_game" value="<%= pagGame.Score %>">
-                            <input type="hidden" name="rating" id="rating" value="<%= pagGame.rating %>">
-                            <input type="hidden" name="total" id="total" value="<%= pagGame.total %>">
-                            
-                            
-                            
                             
 
                             <li><label>Resumo: </label><textarea id="post" name="post" cols="84" rows="8"
@@ -111,20 +99,17 @@
                         <ul type="none">
                             <% posts.forEach(function(item, index){%>
                                 <li>
-                                    <%if( item.id_user == postUser ){%>
+                                    <%if( item.id_user === postUser ){%>
                                         <form id='' action="/post-remove" method="POST">
                                             <button class="remove" type="submit">X</button>
                                             <input type="hidden" name="postId" value="<%= item._id %>">
-                                            <input type="hidden" name="Score" id="Score" value="<%= item.userScore %>">
                                             <input type="hidden" name="id_game" id="id_game" value="<%= pagGame._id %>">
-                                            <input type="hidden" name="Score_game" id="Score_game" value="<%= pagGame.Score %>">
-                                            <input type="hidden" name="rating" id="rating" value="<%= pagGame.rating %>">
-                                            <input type="hidden" name="total" id="total" value="<%= pagGame.total %>">
                                         </form>
                                         <%}%>
                                     <h3 class="cool-link"><%= item.userName %></h3>
                                     <p> <%= item.post %></p>
                                     <h4>Nota:</h4>
+                                    <%=item.id_user%> <%=postUser%>
                                     <div class="notas" > <%= item.userScore %> </div>
                                     
                                 </li>

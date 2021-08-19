@@ -3,7 +3,8 @@ require('../../Database/gameDb');
 const gamedb = mongoose.model('gamedb');
 require('../../Database/postDb');
 
-
+const postRepository = require('../../Repository/posts');
+const gameRepository = require('../../Repository/games');
 
 module.exports =  class classJogo {
 
@@ -27,144 +28,31 @@ module.exports =  class classJogo {
         
     }
 
-    removeGame() {
-        
-        gamedb.remove({ _id: this.gameId }).then(() => {
 
-            console.log('Jogo Deletado');
+
+
+    async calScore() {
+        
+        const posts = await postRepository.findAll(this.gameId);
+
+        var cont = 0;
+
+        for (var i=0; i< posts.length; i++) {
             
-        });
+            console.log(posts[i].userScore);
+            cont += posts[i].userScore;
 
-    }
-
-    editGame() {
-        
-        gamedb.findOne({ _id: this.gameId }).then((game) => {
-        
-            game.name = this.name;
-            game.photo=  this.photo,
-            game.summary = this.summary;
-            
-            game.save().then(() => {
-                
-                console.log("Editado com sucesso");
-                
-        
-            }).catch((err) => {
-    
-                console.log("Erro:" + err);
-                
-    
-            });
-        }).catch((err) => {
-    
-            console.log("Erro:" + err);
-            
-    
-        });
-
-
-
-    }
-
-    ScoreRemove(userScore) {
-
-        console.log(parseInt(this.Score,10));
-        this.removeScore(userScore);
-        this.removeTotal(userScore);
-
-        gamedb.findOne({ _id: this.gameId }).then((game) => {
-        
-            game.Score =  this.Score;
-            game.rating = this.rating - 1;
-            game.total = this.total;
-           
-    
-            game.save().then(() => {
-                
-                console.log("Editado com sucesso");
-        
-            }).catch((err) => {
-                console.log("-->"+err);
-            })
-        })
-
-        console.log("Teste 123",this.total,parseInt(this.Score,10));
-
-
-    }
-
-    removeScore(userScore) {
-        
-        var ScoreUser = parseInt(userScore, 10);
-        var rating = parseInt(this.rating, 10);
-        var total = parseInt(this.total, 10);
-        var ScoreNew = (total - ScoreUser) / (rating - 1);
-        var Score = parseInt(ScoreNew, 10)
-        if (Number.isNaN(Score)) {
-            this.Score = 0;
-        } else {
-            this.Score = Score;
         }
-        
-        console.log(this.Score);
+
+        const score = cont / posts.length;
+ 
+        gameRepository.editScore(this.gameId, score);
+
 
     }
-
-    removeTotal(userScore) {
-        
-        var ScoreTotal = parseInt(this.total, 10);
-        var ScoreUser = parseInt(userScore, 10);
-        var totalNew = ScoreTotal - ScoreUser;
-        totalNew = parseInt(totalNew, 10);
-        this.total = totalNew;
-        console.log(this.total);
-    }
-
-    addScore(userScore) {
-        
-        this.newScore(userScore);
-        this.newTotal(userScore);
-
-        gamedb.findOne({ _id: this.gameId }).then((game) => {
-        
-            game.Score = this.Score;
-            game.rating = this.rating + 1;
-            game.total = this.total;
-           
     
-            game.save().then(() => {
-                
-                console.log("Editado com sucesso");
-        
-            }).catch((err) => {
-                console.log("-->"+err);
-            })
-        })
 
 
-    }
-
-    newScore(userScore) {
-        
-        var ScoreUser = parseInt(userScore, 10);
-        var rating = parseInt(this.rating, 10);
-        var total = parseInt(this.total, 10);
-        var ScoreNew = (total + ScoreUser) / (rating + 1);
-        var Score = parseFloat(ScoreNew.toFixed(1), 10)
-        
-        this.Score =  Score;
-    }
-
-    newTotal(userScore) {
-        
-        var ScoreTotal = parseInt(this.total, 10);
-        var ScoreUser = parseInt(userScore, 10);
-        var totalNew = ScoreTotal + ScoreUser;
-        totalNew = parseInt(totalNew, 10);
-        this.total = totalNew;
-
-    }
 
 }
 

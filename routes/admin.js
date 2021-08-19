@@ -15,19 +15,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static('public/views/upload'));
 
 //db
-const mongoose = require('mongoose');
-require('../Database/gameDb');
-const gamedb = mongoose.model('gamedb');
-require('../Database/postDb');
-const postdb = mongoose.model('postdb');
-
+const gameRepository = require('../Repository/games.js');
+const postRepository = require('../Repository/posts');
 
 //rota para cadastro;
-router.get('/cadastro-jogos',adm_user, function (req, res) {
+router.get('/cadastro-jogos',adm_user, async (req, res) => {
 
-    gamedb.find().then(function (gameList) {
-        res.render('game-register', { gameList: gameList });
-    });
+    const gameList = await gameRepository.findAll();
+    res.render('game-register', { gameList: gameList });
     
 })
 
@@ -36,21 +31,13 @@ router.post('/add',adm_user,upload.single('photo'), (req, res) => {
 
     
     const newGame = {
-        
         name: req.body.name,
         summary: req.body.summary,
         photo:  req.file.originalname,
-        Score: 0,
-        rating: 0,
+     
     }
 
-    new gamedb(newGame).save().then(() => {
-        console.log('Salvo com sucesso');
-    }).catch((err) => {
-        console.log( err + '-->[ERRO] jogo nao salvo');
-    })
-
-    
+    gameRepository.createGame(newGame);
     res.redirect('/admin/cadastro-jogos')
    
 });
@@ -59,17 +46,11 @@ router.post('/add',adm_user,upload.single('photo'), (req, res) => {
 //rota para remover
 router.post('/remove',adm_user, (req, res) => {
 
-
-    const classjogo = new classJogo(req.body.idGame);
-    const classpost = new classPost(null, null, null, req.body.idGame);
-
-    classjogo.removeGame();
-
-    classpost.removeAllPost();
+    gameRepository.removeGame(req.body.idGame);
+    postRepository.removeAllPost(req.body.idGame);
 
     res.redirect('/admin/cadastro-jogos');
 
-    
 });
 
 
@@ -77,11 +58,7 @@ router.post('/remove',adm_user, (req, res) => {
 router.post('/edit',adm_user, upload.single('photoEd'), (req, res) => {
 
     //const Newfoto = req.file.originalname;
-
-    const classjogo = new classJogo(req.body.idEd,req.body.nameEd,req.body.summaryEd,req.file.originalname);
-
-    classjogo.editGame();
-
+    gameRepository.editGame(req.body.idEd, req.body.nameEd, req.body.summaryEd, req.file.originalname);
 
     res.redirect('/admin/cadastro-jogos')
 

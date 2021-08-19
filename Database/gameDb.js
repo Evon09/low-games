@@ -17,19 +17,12 @@ const gameSchema = new Schema({
     },
     Score: {
         type: Number,
-        required: false
+        required: false,
+        default: 0
     },
     photo: {
         type: String
-    },
-    rating: {
-        type: Number,
-        default: 0
-    },
-    total: {
-        type: Number,
-        default: 0
-    },
+    }
     
 
 })
