@@ -44,7 +44,7 @@ module.exports =  class classJogo {
 
         }
 
-        const score = cont / posts.length;
+        const score = (cont / posts.length).toFixed(1);
  
         gameRepository.editScore(this.gameId, score);
 
