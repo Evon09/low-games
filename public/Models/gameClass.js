@@ -39,12 +39,17 @@ module.exports =  class classJogo {
 
         for (var i=0; i< posts.length; i++) {
             
-            console.log(posts[i].userScore);
+           //console.log(posts[i].userScore);
             cont += posts[i].userScore;
 
         }
 
         const score = (cont / posts.length).toFixed(1);
+    
+        if (isNaN(score)) {
+            gameRepository.editScore(this.gameId, 0);
+            return 0;
+        }
  
         gameRepository.editScore(this.gameId, score);
 

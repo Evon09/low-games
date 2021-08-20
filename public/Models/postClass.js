@@ -16,7 +16,6 @@ module.exports = class classPost {
         this.gameId = gameId;
         this.userId = userId;
 
-        
     }
 
 
