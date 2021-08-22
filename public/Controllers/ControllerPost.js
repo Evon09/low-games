@@ -3,7 +3,7 @@ class Controller {
 
     verificarCampo(campo) {
 
-        if (campo === "" || campo == Null) {
+        if (campo === "" || campo == null) {
 
             return false;
         } else {
@@ -17,11 +17,15 @@ class Controller {
 
         if (!this.verificarCampo(post) ) {
             window.alert("ERRO Preencha o campo");
+            var confirmatio = confirm("Deseja postar esse comentario?");
             
             return false;
         } else {
-            if (window.confirm("Você realmente quer sair?")) {
-                window.open("sair.html", "Obrigado pela visita!");
+
+            var confirmatio = confirm("Deseja postar esse comentario?");
+            console.log(confirmatio);
+            if (confirmatio == false) {
+                return false;
               }
 
             return true;
