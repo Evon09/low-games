@@ -14,18 +14,9 @@ const classJogo = require('../public/Models/gameClass');
 
 
 //bd
-const mongoose = require('mongoose');
-require('../Database/gameDb');
-require('../Database/userDb');
-require('../Database/postDb');
-const gamedb = mongoose.model('gamedb');
-const users = mongoose.model('userdb');
-const postdb = mongoose.model('postdb');
-
-
 const postRepository = require('../Repository/posts');
 const gameRepository = require('../Repository/games.js');
-
+const usersRepository = require('../Repository/users');
 
 //express statics
 app.use(express.static(path.join(__dirname, 'public')));
@@ -47,33 +38,38 @@ router.get('/', async (req, res) => {
 //rotpara cada jogo
 router.get('/jogo/:id', async (req, res) => {
 
- 
-    if(req.user == null) {
-            
-        const game = await gameRepository.findGame(req.params.id);
-        const posts = await postRepository.findAll(req.params.id);
+    const game = await gameRepository.findGame(req.params.id);
+    const posts = await postRepository.findAll(req.params.id);
+    
+    if (req.user != null) {
 
-        res.render('Game', { pagGame: game, posts: posts, postUser: null });
-
-    }else{
-        
-        const game = await gameRepository.findGame(req.params.id);
-        const posts = await postRepository.findAll(req.params.id);
         const postUser = await postRepository.findPost(req.user._id, req.params.id);
         
-        res.render('Game', { pagGame: game, posts: posts, postUser: postUser});
-                            
+        if (postUser.length == 1) {
+            
+            res.render('Game', { pagGame: game, posts: posts, postUser: postUser[0].id_user});
+
+        } else {
+            res.render('Game', { pagGame: game, posts: posts, postUser: null });
+        }
+    } else {
+        
+            res.render('Game', { pagGame: game, posts: posts, postUser: null });
+
     }
+    
+        
+  
 
 
 });
 
 
-router.post('/post-remove', (req, res) => {
+router.post('/post-remove', async (req, res) => {
 
     
     
-    postRepository.removePost(req.body.postId);
+    await postRepository.removePost(req.body.postId);
     const classjogo = new classJogo(req.body.id_game);
 
     classjogo.calScore();
@@ -100,6 +96,7 @@ router.post('/add-post', function (req, res) {
     postRepository.addPost(newPost);
 
     const classjogo = new classJogo(req.body.id_game);
+
     classjogo.calScore();
     // classjogo.addScore(req.body.Score);
     
@@ -144,30 +141,33 @@ router.post('/login-user', function (req, res, next) {
 
 
 //Rota que faz o cadastro
-router.post("/cad-user", function (req, res) {
+router.post("/cad-user", async (req, res) => {
 
 
-    const newUser = new classUser(req.body.nome, req.body.email, req.body.pass, 0);
+    const user = await usersRepository.findEmail(req.body.email);
 
-    users.findOne({ email_user: req.body.email }).then((usuario) => {
-        //console.log(usuario);
-        if (usuario) {
+    const classuser = new classUser(req.body.nome, req.body.email, req.body.pass, 0);
 
-            console.log("EMAIL ja cadastrado");
-            res.redirect('/cadastro');
-           
-        } else {
+    //console.log(!user);
+
+
+    if (!user) {
             
-            if (newUser.hashpass()) {
-                newUser.createUser();
-                res.redirect('/login');
-            } else {
-                res.redirect('/cadastro');
-            }
-            
-        }
+        classuser.hashpass();
+
+        classuser.createUser();
+        res.redirect('/login');
+    } else {
+        
+        console.log("EMAIL ja cadastrado");
+        res.redirect('/cad-user');
+
+
+    }
+ 
+        
        
-    })
+   
 
 
 });

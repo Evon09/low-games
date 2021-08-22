@@ -37,6 +37,8 @@ module.exports =  class classJogo {
 
         var cont = 0;
 
+        console.log(posts.length);
+
         for (var i=0; i< posts.length; i++) {
             
            //console.log(posts[i].userScore);
@@ -44,15 +46,21 @@ module.exports =  class classJogo {
 
         }
 
-        const score = (cont / posts.length).toFixed(1);
+        
+
+        const score = (cont / posts.length);
     
         if (isNaN(score)) {
-            gameRepository.editScore(this.gameId, 0);
-            return 0;
-        }
- 
-        gameRepository.editScore(this.gameId, score);
+     
+            await gameRepository.editScore(this.gameId, 0);
+   
+        } else {
 
+            await gameRepository.editScore(this.gameId, score.toFixed(1));
+
+        }
+       
+        
 
     }
     

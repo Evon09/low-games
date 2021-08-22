@@ -67,9 +67,9 @@
             
             <div class="jogos">
 
-                <%if(!user || postUser !== null ){%>
+                <%if(!user || postUser != null){%>
                     <div class="formulario" style="height:30px"></div>
-
+                    
                 <%}else{%>
                 <div class="formulario">
 
@@ -99,7 +99,7 @@
                         <ul type="none">
                             <% posts.forEach(function(item, index){%>
                                 <li>
-                                    <%if( item.id_user === postUser ){%>
+                                    <%if( item.id_user == postUser ){%>
                                         <form id='' action="/post-remove" method="POST">
                                             <button class="remove" type="submit">X</button>
                                             <input type="hidden" name="postId" value="<%= item._id %>">
@@ -109,7 +109,7 @@
                                     <h3 class="cool-link"><%= item.userName %></h3>
                                     <p> <%= item.post %></p>
                                     <h4>Nota:</h4>
-                                    <%=item.id_user%> <%=postUser%>
+                                    
                                     <div class="notas" > <%= item.userScore %> </div>
                                     
                                 </li>

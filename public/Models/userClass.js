@@ -1,8 +1,7 @@
 var userdb = require('../../Database/userDb');
 const bcrypt = require('bcryptjs');
-const mongoose = require('mongoose');
-const users = mongoose.model('userdb');
 
+const usersRepository = require('../../Repository/users');
 
 
 module.exports = class classUser {
@@ -31,11 +30,7 @@ module.exports = class classUser {
             pass: this.senha
         }
     
-        new users(newUser).save().then(() => {
-            console.log('User cadastrado');
-        }).catch((err) => {
-            console.log('[ERRO] User nao cadastrado');
-        })
+        usersRepository.createUser(newUser);
     }
 
 

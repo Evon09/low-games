@@ -24,7 +24,7 @@ const findAll = async () => {
 
 const findGame = async (gameId) => {
 
-    const game = gamedb.findOne({ _id:gameId })
+    const game = await gamedb.findOne({ _id:gameId })
     return game;
 
 } 
@@ -73,7 +73,7 @@ const editGame = async (gameId,name,summary,photo)=> {
 const editScore = async (gameId, score) => {
     
 
-    await gamedb.findOne({ _id:gameId }).then((game) => {
+    await gamedb.findOne({ _id:gameId }).then(async (game) => {
     
         game.Score = score;
         game.save();

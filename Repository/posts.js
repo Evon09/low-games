@@ -20,7 +20,7 @@ const removeAllPost = async (gameId) => {
 const findAll = async (gameId) => {
     
     const posts = await postdb.find({ id_game: gameId });
-    console.log(posts);
+    //console.log(posts);
     return posts;
 
 }
@@ -28,14 +28,9 @@ const findAll = async (gameId) => {
 const findPost = async (userId,gameId) => {
     
    
-    const post = await postdb.find({ id_user: userId, id_game: gameId });
-    
-    if (post[0] == undefined) {
-
-        return null;
-    }
-    
-    return post[0].id_user;
+    const post = await postdb.find({ id_user: userId, id_game: gameId })
+        
+    return post;
 
 }
 
