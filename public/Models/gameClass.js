@@ -1,7 +1,3 @@
-const mongoose = require('mongoose');
-require('../../Database/gameDb');
-const gamedb = mongoose.model('gamedb');
-require('../../Database/postDb');
 
 const postRepository = require('../../Repository/posts');
 const gameRepository = require('../../Repository/games');
@@ -12,7 +8,7 @@ module.exports =  class classJogo {
     name = null;
     photo = null;
     summary = null;
-    Score = 0;//Nota do jogo
+    Score = null;//Nota do jogo
     rating = null;//peso media 
     total = null;//Total de nota
 
@@ -22,11 +18,29 @@ module.exports =  class classJogo {
         this.name = name;
         this.summary = summary;
         this.photo = photo;
-        this.Score = parseFloat(Score,10);
-        this.rating = parseInt(rating, 10);
+        this.Score = Score
+        this.rating = rating
         this.total = total;
         
     }
+
+
+
+    newGame() {
+        
+        const newGame = {
+            name: this.name,
+            summary: this.summary,
+            photo:  this.photo,
+         
+        }
+    
+        gameRepository.createGame(newGame);
+
+
+
+    }
+
 
 
 
@@ -64,6 +78,8 @@ module.exports =  class classJogo {
 
     }
     
+
+
 
 
 

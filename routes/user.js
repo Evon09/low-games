@@ -11,7 +11,7 @@ const router = express.Router();
 //Models Class
 const classUser = require('../public/Models/userClass');
 const classJogo = require('../public/Models/gameClass');
-
+const classPost = require('../public/Models/postClass');
 
 //bd
 const postRepository = require('../Repository/posts');
@@ -83,17 +83,9 @@ router.post('/post-remove', async (req, res) => {
 router.post('/add-post', function (req, res) {
 
 
-    const newPost= {
-        
-        userName: req.user.userName,
-        userScore: req.body.Score,
-        post: req.body.post,
-        id_game: req.body.id_game,
-        id_user:  req.user._id,
-        
-    }
+    const NewPost = new classPost(null, req.user.userName, req.body.Score, req.body.post, req.body.id_game, req.user._id);
 
-    postRepository.addPost(newPost);
+    NewPost.newPost();
 
     const classjogo = new classJogo(req.body.id_game);
 
@@ -148,9 +140,6 @@ router.post("/cad-user", async (req, res) => {
 
     const classuser = new classUser(req.body.nome, req.body.email, req.body.pass, 0);
 
-    //console.log(!user);
-
-
     if (!user) {
             
         classuser.hashpass();
@@ -165,10 +154,6 @@ router.post("/cad-user", async (req, res) => {
 
     }
  
-        
-       
-   
-
 
 });
 

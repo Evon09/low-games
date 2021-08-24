@@ -79,5 +79,5 @@ const user = require('./routes/user');
 app.use('/admin', admin);
 app.use('/', user);
 
-//inciar o servidor http://localhost:3000/
+//inciar o servidor http://localhost:9000/
 app.listen(9000, () => console.log('Aplicação executando na porta 9000!'));

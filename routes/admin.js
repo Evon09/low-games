@@ -7,7 +7,7 @@ const express = require('express')
 var app = express();
 const router = express.Router()
 const classJogo = require('../public/Models/gameClass');
-const classPost = require('../public/Models/postClass');
+
 
 
 //express statics
@@ -30,14 +30,10 @@ router.get('/cadastro-jogos',adm_user, async (req, res) => {
 router.post('/add',adm_user,upload.single('photo'), (req, res) => {
 
     
-    const newGame = {
-        name: req.body.name,
-        summary: req.body.summary,
-        photo:  req.file.originalname,
-     
-    }
+    const NewGame = new classJogo(null,req.body.name,req.body.summary,req.file.originalname);
 
-    gameRepository.createGame(newGame);
+    NewGame.newGame();
+    
     res.redirect('/admin/cadastro-jogos')
    
 });
