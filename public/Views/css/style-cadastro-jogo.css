@@ -196,7 +196,9 @@ footer{
     width: 100%;
     min-height: 100px;
     
+    color:white;
     background-color: #3c3154;
+    text-align: center;
 
 }
 
@@ -271,3 +273,18 @@ textarea {
 
 }
 
+::-webkit-scrollbar{
+
+    width: 12px;
+    background:linear-gradient(to bottom right, #9d33d7 0%, #4a6cba 50%, #9323c7 100%);
+    
+  
+}
+  
+::-webkit-scrollbar-thumb{
+  
+    background-color:rgb(63, 6, 110);
+    border-radius:8px;
+    box-shadow: 0 0 1em rgb(118, 37, 165);
+  
+}

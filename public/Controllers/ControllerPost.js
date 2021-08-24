@@ -17,7 +17,6 @@ class Controller {
 
         if (!this.verificarCampo(post) ) {
             window.alert("ERRO Preencha o campo");
-            var confirmatio = confirm("Deseja postar esse comentario?");
             
             return false;
         } else {

@@ -54,7 +54,7 @@
     </header>
     <main>
         <div class="container">
-            
+            <!-- Info do jogo -->
             <section class="jogo-avaliado">
                 <img src="../<%= pagGame.photo %>" alt="">
                 <h1><%=pagGame.name %></h1>
@@ -71,6 +71,7 @@
                     <div class="formulario" style="height:30px"></div>
                     
                 <%}else{%>
+                    <!-- Postar comentario -->
                 <div class="formulario">
 
                     <form action="/add-post" method="post" onsubmit="return controller.checkForm();">
@@ -95,7 +96,7 @@
 
                 <section class="jogo">
                     <ul type="none" id="lista">
-              
+              <!-- Comentarios -->
                         <ul type="none">
                             <% posts.forEach(function(item, index){%>
                                 <li>
@@ -125,7 +126,7 @@
 
     <footer>
 
-
+        <p>site feito por jair</p>
 
     </footer>
 

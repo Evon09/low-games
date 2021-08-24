@@ -7,7 +7,7 @@ class Controller {
 
     verificarCampo(campo) {
 
-        if (campo === "" || campo == Null) {
+        if (campo === "" || campo == null) {
 
             return false;
         } else {
@@ -17,16 +17,22 @@ class Controller {
     }
 
     checkForm() {
-        var nome = document.getElementById("nome").value;
-        var resumo = document.getElementById("resumo").value;
-        console.log(nome);
-        console.log(resumo);
+        var nome = document.getElementById("name").value;
+        var resumo = document.getElementById("summary").value;
         if (!this.verificarCampo(nome) || !this.verificarCampo(resumo)) {
             window.alert("ERRO Preencha o campo");
             return false;
         } else {
-
-            return true;
+            var confirmation = confirm("Deseja postar esse comentario?");
+            console.log(confirmation);
+            if (confirmation == false) {
+                return false;
+            } else {
+                
+                return true;
+                
+            }
+            
         }
     }
 
@@ -41,13 +47,16 @@ class Controller {
             alert("[ERRO] Campo vazio");
             return false;
         } else {
-            return true;
-        }
+            var confirmation = confirm("Deseja postar esse comentario?");
+            if (confirmation == false) {
+                return false;
+            }
 
-      
+            return true;
+           
+        }
       
     }
-
     
 
 }

@@ -64,7 +64,7 @@ router.get('/jogo/:id', async (req, res) => {
 
 });
 
-
+//Remover post
 router.post('/post-remove', async (req, res) => {
 
     
@@ -79,7 +79,7 @@ router.post('/post-remove', async (req, res) => {
     
 });
 
-
+//Adicionar post
 router.post('/add-post', function (req, res) {
 
 
@@ -112,7 +112,7 @@ router.get('/user-register', function (req, res){
  
 });
  
-
+//logout
 router.get('/logout', function (req, res) {
     
     req.logout();
@@ -149,7 +149,7 @@ router.post("/cad-user", async (req, res) => {
     } else {
         
         console.log("EMAIL ja cadastrado");
-        res.redirect('/cad-user');
+        res.redirect('/user-register');
 
 
     }

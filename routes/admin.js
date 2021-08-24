@@ -14,7 +14,7 @@ const classJogo = require('../public/Models/gameClass');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static('public/views/upload'));
 
-//db
+//repository
 const gameRepository = require('../Repository/games.js');
 const postRepository = require('../Repository/posts');
 

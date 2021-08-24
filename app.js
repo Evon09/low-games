@@ -11,6 +11,9 @@ const flash = require('connect-flash');
 require('./Database/gameDb');
 const jogos = mongoose.model('gamedb');
 const multer = require('multer');
+
+
+//faz o upload da imagem
 const storage = multer.diskStorage({
     
     destination: (req, file, cb) => {

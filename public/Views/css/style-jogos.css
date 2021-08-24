@@ -1,5 +1,5 @@
 *{
-    box-sizing: 0px;
+    box-sizing: border-box;
     margin: 0px;
     padding: 0px;
     
@@ -12,6 +12,7 @@ body{
 }
 
 header{
+
     background-color: rgb(38, 27, 48);
     
 }
@@ -35,6 +36,8 @@ main{
     position:relative;
     padding-bottom: 150px;
 }
+
+
 .jogos{
 
     background-color: rgb(255, 255, 255);
@@ -43,6 +46,7 @@ main{
     border-radius: 10px;
     
 }
+
 /**********************************************/
 
 
@@ -185,14 +189,6 @@ textarea{
 
 
 
-footer{
-
-    width: 100%;
-    min-height: 100px;
-    
-    background-color: #3c3154;
-
-}
 
 
 
@@ -276,3 +272,33 @@ textarea {
     margin: 10px;
 
 }
+
+
+
+footer{
+
+    width: 100%;
+
+    color:white;
+    background-color: #3c3154;
+    text-align: center;
+    padding: 30px 0px 30px 0px ;
+
+}
+
+
+::-webkit-scrollbar{
+
+    width: 12px;
+    background:linear-gradient(to bottom right, #9d33d7 0%, #4a6cba 50%, #9323c7 100%);
+    
+  
+  }
+  
+::-webkit-scrollbar-thumb{
+  
+    background-color:rgb(63, 6, 110);
+    border-radius:8px;
+    box-shadow: 0 0 1em rgb(118, 37, 165);
+  
+  }
